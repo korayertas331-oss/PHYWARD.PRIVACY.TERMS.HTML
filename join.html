@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phyward — Davet / Invite</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:linear-gradient(160deg,#1a0b3d,#3b2a7a);color:#fff;text-align:center}
+  .card{max-width:420px;width:90%;padding:32px 24px;border-radius:20px;background:rgba(255,255,255,.07)}
+  h1{margin:8px 0 4px;font-size:26px}
+  p{color:#d9cdf5;line-height:1.5}
+  .code{font-size:28px;font-weight:800;letter-spacing:3px;margin:16px 0;padding:12px;border:2px dashed #e91e9c;border-radius:12px}
+  button,a.btn{display:block;width:100%;box-sizing:border-box;margin-top:12px;padding:14px;border:0;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none}
+  button{background:#fff;color:#3b2a7a}
+  a.btn{background:#e91e9c;color:#fff}
+  small{display:block;margin-top:18px;color:#b79ce0}
+</style>
+</head>
+<body>
+<div class="card">
+  <div style="font-size:44px">🏆</div>
+  <h1>Phyward</h1>
+  <p id="msg">Bir arkadaşın seni Phyward'a davet etti! Uygulamayı indir, kayıt olurken bu davet kodunu gir.<br><span lang="en">A friend invited you to Phyward! Install the app and enter this invite code when you sign up.</span></p>
+  <div class="code" id="code">—</div>
+  <button id="copy" type="button">Kodu kopyala / Copy code</button>
+  <a class="btn" id="store" href="https://play.google.com/store/apps/details?id=com.phyward.app">Google Play'den indir / Get it on Google Play</a>
+  <small><a href="/" style="color:#b79ce0">Gizlilik Politikası / Privacy Policy</a></small>
+</div>
+<script>
+  var ref = (new URLSearchParams(location.search).get('ref') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 32);
+  var codeEl = document.getElementById('code');
+  if (ref) {
+    codeEl.textContent = ref;
+    document.getElementById('store').href = 'https://play.google.com/store/apps/details?id=com.phyward.app&referrer=' + encodeURIComponent('ref=' + ref);
+  } else {
+    codeEl.style.display = 'none';
+    document.getElementById('copy').style.display = 'none';
+  }
+  document.getElementById('copy').onclick = function () {
+    var btn = this;
+    function done() { btn.textContent = 'Kopyalandı ✓ / Copied ✓'; }
+    if (navigator.clipboard) { navigator.clipboard.writeText(ref).then(done, done); } else { done(); }
+  };
+</script>
+</body>
+</html>
