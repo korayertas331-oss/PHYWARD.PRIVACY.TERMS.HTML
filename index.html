@@ -3,289 +3,719 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Phyward — Gizlilik Politikası / Privacy Policy</title>
+  <title>Phyward — Zamanını Ödüle Dönüştür</title>
+  <meta name="description" content="Phyward ile saatlik bonus, reklam izleme ve bilgi yarışmasından Phy kazan. Ücretsiz, anlık, güvenli." />
+  <meta property="og:title" content="Phyward — Zamanını Ödüle Dönüştür" />
+  <meta property="og:description" content="Her saat ücretsiz Phy kazan. Reklam izle, bilgi yarışmasına katıl, arkadaşlarını davet et." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://phyward.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #08040F;
+      --surface:  #110720;
+      --card:     #1A0B33;
+      --purple:   #8B5CF6;
+      --gold:     #FFD700;
+      --green:    #00FF88;
+      --pink:     #FF2DAF;
+      --text:     #E8E0F0;
+      --muted:    rgba(255,255,255,.45);
+      --border:   rgba(139,92,246,.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #08040F;
-      color: #e0e0e0;
-      line-height: 1.7;
-      padding: 0 16px;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
-    .container { max-width: 720px; margin: 0 auto; padding: 40px 0 80px; }
-    .logo { text-align: center; margin-bottom: 8px; font-size: 36px; }
-    h1 { text-align: center; color: #FFD700; font-size: 28px; margin-bottom: 4px; }
-    .meta { text-align: center; color: #ffffff60; font-size: 13px; margin-bottom: 40px; }
-    h2 { color: #FFD700; font-size: 17px; margin: 32px 0 10px; border-bottom: 1px solid #ffffff15; padding-bottom: 6px; }
-    p { color: #cccccc; font-size: 14px; margin-bottom: 12px; }
-    ul { padding-left: 20px; margin-bottom: 12px; }
-    li { color: #cccccc; font-size: 14px; margin-bottom: 6px; }
-    .card {
-      background: #1A0B33;
-      border: 1px solid #8B5CF640;
-      border-radius: 12px;
-      padding: 20px;
-      margin-top: 40px;
-      text-align: center;
-      color: #ffffffaa;
-      font-size: 13px;
+
+    /* ── NAVBAR ───────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      background: rgba(8,4,15,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    a { color: #8B5CF6; }
-    .lang-switch { display: flex; gap: 12px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap; }
-    .lang-btn {
-      background: #1A0B33; border: 1px solid #8B5CF660; color: #B79CE0;
-      padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 13px;
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 900; font-size: 20px; color: var(--gold);
       text-decoration: none;
     }
-    .lang-btn.active { background: #8B5CF6; color: #fff; border-color: #8B5CF6; }
-    .section { display: none; }
-    .section.active { display: block; }
+    .nav-logo .hex {
+      width: 36px; height: 36px; background: var(--purple);
+      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 900; color: #fff;
+    }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a {
+      color: var(--muted); font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-dl {
+      background: var(--purple); color: #fff !important;
+      padding: 8px 18px; border-radius: 20px; font-size: 13px !important;
+    }
+    .nav-dl:hover { background: #7C3AED; color: #fff !important; }
+    .lang-nav { display: flex; gap: 6px; }
+    .lang-nav button {
+      background: none; border: 1px solid var(--border); color: var(--muted);
+      padding: 4px 10px; border-radius: 12px; cursor: pointer;
+      font-size: 11px; font-family: inherit; font-weight: 600; transition: all .2s;
+    }
+    .lang-nav button.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+    .nav-mobile-dl { display: none; }
+
+    /* ── HERO ─────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 24px 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; left: -200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -150px; right: -150px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,215,0,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.3);
+      border-radius: 20px; padding: 6px 14px; font-size: 12px;
+      color: var(--purple); font-weight: 700; margin-bottom: 20px;
+    }
+    .hero-badge span { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 54px);
+      font-weight: 900; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--purple); }
+    .hero h1 strong { color: var(--gold); font-style: normal; }
+    .hero-sub {
+      font-size: 17px; color: var(--muted); line-height: 1.7;
+      margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--purple); color: #fff;
+      padding: 14px 28px; border-radius: 14px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 24px rgba(139,92,246,.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,.5); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1.5px solid var(--border); color: var(--text);
+      padding: 14px 28px; border-radius: 14px;
+      font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-secondary:hover { border-color: var(--purple); background: rgba(139,92,246,.08); }
+    .hero-note { margin-top: 14px; font-size: 12px; color: var(--muted); }
+
+    /* Phone mockup */
+    .phone-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
+    .phone {
+      width: 240px; height: 480px;
+      background: var(--surface);
+      border-radius: 36px;
+      border: 2px solid rgba(139,92,246,.4);
+      box-shadow: 0 0 60px rgba(139,92,246,.2), inset 0 0 20px rgba(0,0,0,.5);
+      padding: 20px 14px;
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; gap: 10px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .phone-notch {
+      width: 60px; height: 8px; background: var(--bg);
+      border-radius: 4px; margin: 0 auto 10px;
+    }
+    .phone-balance {
+      text-align: center; padding: 14px;
+      background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(255,215,0,.1));
+      border-radius: 16px; border: 1px solid rgba(255,215,0,.2);
+    }
+    .phone-balance .bal-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .phone-balance .bal-val { font-size: 24px; font-weight: 900; color: var(--gold); }
+    .phone-balance .bal-unit { font-size: 10px; color: var(--purple); font-weight: 700; }
+    .phone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .phone-card {
+      background: rgba(139,92,246,.1); border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px 8px; text-align: center;
+    }
+    .phone-card .pc-icon { font-size: 18px; margin-bottom: 4px; }
+    .phone-card .pc-name { font-size: 8px; color: var(--muted); font-weight: 600; }
+    .phone-card .pc-val { font-size: 10px; color: var(--green); font-weight: 700; }
+    .phone-status {
+      background: rgba(0,255,136,.08); border: 1px solid rgba(0,255,136,.2);
+      border-radius: 10px; padding: 8px 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .phone-status .ps-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
+    .phone-status .ps-text { font-size: 9px; color: var(--green); font-weight: 600; }
+    /* Floating coins */
+    .coin { position: absolute; border-radius: 50%; animation: coinFloat linear infinite; opacity: .7; }
+    .coin1 { width:30px;height:30px;background:var(--gold);top:10%;left:-15%;animation-duration:6s;animation-delay:0s; }
+    .coin2 { width:20px;height:20px;background:var(--purple);top:60%;right:-10%;animation-duration:8s;animation-delay:2s; }
+    .coin3 { width:16px;height:16px;background:var(--green);bottom:15%;left:-8%;animation-duration:7s;animation-delay:1s; }
+    @keyframes coinFloat { 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(180deg)} 100%{transform:translateY(0) rotate(360deg)} }
+
+    /* ── STATS BAR ────────────────────────────────── */
+    .stats {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
+    }
+    .stats-inner {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px; text-align: center;
+      transition: transform .2s, border-color .2s;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: var(--purple); }
+    .stat-num { font-size: 36px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 14px; color: var(--muted); font-weight: 600; }
+
+    /* ── HOW IT WORKS ─────────────────────────────── */
+    section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+    .section-tag {
+      display: inline-block; background: rgba(139,92,246,.12);
+      border: 1px solid rgba(139,92,246,.3); border-radius: 20px;
+      padding: 5px 14px; font-size: 12px; font-weight: 700;
+      color: var(--purple); margin-bottom: 14px;
+    }
+    h2 {
+      font-size: clamp(24px, 4vw, 38px); font-weight: 900;
+      line-height: 1.2; margin-bottom: 12px;
+    }
+    h2 em { font-style: normal; color: var(--purple); }
+    .section-sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; max-width: 540px; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .step {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 24px; position: relative;
+      transition: transform .2s, border-color .2s;
+    }
+    .step:hover { transform: translateY(-4px); border-color: var(--purple); }
+    .step::before {
+      content: attr(data-n);
+      position: absolute; top: -14px; left: 24px;
+      background: var(--purple); color: #fff;
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 900;
+    }
+    .step-icon { font-size: 36px; margin-bottom: 16px; }
+    .step h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+    .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    /* Connector line between steps (desktop) */
+    .steps-wrap { position: relative; }
+
+    /* ── FEATURES ─────────────────────────────────── */
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .feat {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px;
+      transition: transform .2s, border-color .2s;
+    }
+    .feat:hover { transform: translateY(-4px); border-color: var(--purple); }
+    .feat.coming {
+      border-style: dashed; opacity: .7;
+    }
+    .feat-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 16px;
+      background: rgba(139,92,246,.12); border: 1px solid var(--border);
+    }
+    .feat h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .feat p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .feat-badge {
+      display: inline-block; margin-top: 12px;
+      background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.3);
+      color: var(--gold); border-radius: 10px;
+      padding: 3px 10px; font-size: 11px; font-weight: 700;
+    }
+    .feat-badge.green { background: rgba(0,255,136,.1); border-color: rgba(0,255,136,.3); color: var(--green); }
+    .feat-badge.pink  { background: rgba(255,45,175,.1); border-color: rgba(255,45,175,.3); color: var(--pink); }
+
+    /* ── DOWNLOAD CTA ────────────────────────────── */
+    .cta-section {
+      max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(139,92,246,.15), rgba(255,215,0,.06));
+      border: 1px solid rgba(139,92,246,.3);
+      border-radius: 28px; padding: 60px 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute; top: -100px; right: -100px;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,92,246,.12) 0%, transparent 70%);
+    }
+    .cta-box h2 { font-size: clamp(24px, 4vw, 40px); margin-bottom: 14px; }
+    .cta-box p { font-size: 17px; color: var(--muted); margin-bottom: 36px; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #000; border: 1.5px solid rgba(255,255,255,.15);
+      border-radius: 14px; padding: 12px 24px; color: #fff;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+    }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+    .store-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .store-btn-text { text-align: left; }
+    .store-btn-text small { display: block; font-size: 10px; color: rgba(255,255,255,.6); font-weight: 500; }
+    .store-btn-text strong { font-size: 16px; font-weight: 700; }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { font-size: 18px; font-weight: 900; color: var(--gold); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { color: var(--muted); font-size: 12px; }
+
+    /* ── LANG VISIBILITY ─────────────────────────── */
+    .t  { display: none; }
+    .t.active  { display: inline; }
+    .tb { display: none; }
+    .tb.active { display: block; }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .phone-wrap { order: -1; }
+      .phone { width: 200px; height: 400px; }
+      .steps { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .nav-links .nav-dl-desktop { display: none; }
+      .nav-mobile-dl { display: block; }
+      .hero-cta { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .cta-box { padding: 40px 24px; }
+      nav { padding: 12px 16px; }
+      .nav-links { gap: 12px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">🏆</div>
-    <h1>Phyward</h1>
-    <p class="meta">Gizlilik Politikası / Privacy Policy — Son güncelleme: Kasım 2026</p>
 
-    <div class="lang-switch">
-      <a class="lang-btn active" href="#" onclick="showLang('tr',this);return false;">Türkçe</a>
-      <a class="lang-btn" href="#" onclick="showLang('en',this);return false;">English</a>
-      <a class="lang-btn" href="#" onclick="showLang('es',this);return false;">Español</a>
-    </div>
-
-    <!-- TÜRKÇE -->
-    <div class="section active" id="lang-tr">
-      <h2 style="font-size:20px; border-bottom: 2px solid #FFD70040; color:#FFD700;">🇹🇷 Türkçe</h2>
-
-      <h2>1. Topladığımız Veriler</h2>
-      <p>Phyward uygulaması aşağıdaki kişisel verileri toplar:</p>
-      <ul>
-        <li><strong>E-posta adresi</strong> — kayıt, giriş ve hesap yönetimi için</li>
-        <li><strong>Kullanıcı adı / görünen isim</strong> — profil için</li>
-        <li><strong>Cihaz kimliği</strong> (Android ID) — çoklu hesap ve hile önleme için</li>
-        <li><strong>Cihaz parmak izi</strong> — anti-fraud doğrulama için (model, platform, app versiyonu)</li>
-        <li><strong>IP adresi</strong> — VPN/proxy tespiti amacıyla ip-api.com üzerinden işlenir</li>
-        <li><strong>Reklam Kimliği (AD_ID)</strong> — Google AdMob, Unity Ads ve Pangle üzerinden kişiselleştirilmiş reklam için</li>
-        <li><strong>Oyun ve görev geçmişi</strong> — kazanılan ödüller, oynanan oyunlar, çevrim içi aktiviteler</li>
-        <li><strong>Hediye kartı teslimat e-postası</strong> — satın alma sırasında girilen e-posta; kart teslimi için kullanılır</li>
-        <li><strong>Referral (davet) kodu kullanımı</strong> — hangi kullanıcı tarafından davet edildiğiniz</li>
-      </ul>
-
-      <h2>2. Verilerin Kullanım Amacı</h2>
-      <ul>
-        <li>Hesap oluşturma ve kimlik doğrulama</li>
-        <li>Çoklu hesap ve hile önleme (cihaz ID ve parmak izi)</li>
-        <li>VPN/proxy tespiti ile reklam sahtekârlığını engelleme</li>
-        <li>Kişiselleştirilmiş reklam sunumu (AdMob, Unity Ads, Pangle)</li>
-        <li>Hediye kartı teslimatının gerçekleştirilmesi</li>
-        <li>Uygulama performansının ve güvenliğinin iyileştirilmesi</li>
-        <li>Yasal yükümlülüklerin (KVKK, GDPR) yerine getirilmesi</li>
-      </ul>
-
-      <h2>3. Üçüncü Taraflarla Veri Paylaşımı</h2>
-      <ul>
-        <li><strong>Supabase</strong> — veritabanı ve kimlik doğrulama altyapısı (ABD merkezli, SCCs kapsamında)</li>
-        <li><strong>Google AdMob</strong> — reklam hizmetleri ve mediation (AD_ID kullanır)</li>
-        <li><strong>Unity Ads</strong> (Unity Technologies) — AdMob mediation üzerinden reklam; cihaz bilgisi ve reklam kimliği kullanılır. <a href="https://unity.com/legal/privacy-policy" target="_blank">Gizlilik Politikası</a></li>
-        <li><strong>Pangle</strong> (TikTok for Business) — AdMob mediation üzerinden reklam; cihaz bilgisi ve reklam kimliği kullanılır. <a href="https://www.pangleglobal.com/privacy/enduser-en" target="_blank">Gizlilik Politikası</a></li>
-        <li><strong>Sentry</strong> — kilitlenme ve hata izleme (anonim hata raporu; e-posta gibi kişisel veri içermez)</li>
-        <li><strong>ip-api.com</strong> — VPN/proxy tespiti (IP gönderilir, kişisel veri saklanmaz)</li>
-        <li><strong>BitLabs</strong> (web.bitlabs.ai) — anket hizmetleri; kullanıcı kimliği URL parametresi olarak iletilir</li>
-      </ul>
-      <p>Verileriniz hiçbir koşulda üçüncü taraflara <strong>satılmaz</strong>.</p>
-
-      <h2>4. Reklam Kimliği (AD_ID) ve Reklam Ağları</h2>
-      <p>Phyward, Google AdMob mediation altyapısı üzerinden birden fazla reklam ağı kullanmaktadır: <strong>Google AdMob</strong>, <strong>Unity Ads</strong> ve <strong>Pangle (TikTok for Business)</strong>. Bu ağlar Android Reklam Kimliğinizi (AD_ID) ve cihaz bilgilerini reklam hedefleme amacıyla işleyebilir. Android ayarlarından reklam kişiselleştirmeyi devre dışı bırakabilirsiniz; bu durumda bağlamsal (kişiselleştirilmemiş) reklamlar gösterilmeye devam edebilir.</p>
-
-      <h2>5. Hediye Kartı Verileri</h2>
-      <p>Hediye kartı satın alırken girdiğiniz e-posta adresi, kart teslimatı amacıyla yalnızca ilgili sipariş kaydında saklanır. Bu adres pazarlama veya başka bir amaçla kullanılmaz.</p>
-
-      <h2>6. Veri Güvenliği</h2>
-      <p>Verileriniz Supabase altyapısında şifreli olarak saklanır. Row Level Security (RLS) politikaları ile her kullanıcı yalnızca kendi verisine erişebilir. Cihaz ID ve kullanıcı verileri üçüncü taraflara satılmaz.</p>
-
-      <h2>7. Veri Saklama Süresi</h2>
-      <p>Hesabınızı silmeniz durumunda kişisel verileriniz <strong>derhal</strong> anonimleştirilir ve 30 gün içinde kalıcı olarak kaldırılır. Hile tespiti için anonim cihaz kayıtları 90 gün saklanabilir.</p>
-
-      <h2>8. Haklarınız (KVKK / GDPR)</h2>
-      <ul>
-        <li><strong>Erişim hakkı:</strong> Hakkınızda hangi verilerin tutulduğunu öğrenme</li>
-        <li><strong>Düzeltme hakkı:</strong> Yanlış veya eksik verilerin güncellenmesi</li>
-        <li><strong>Silme hakkı:</strong> Uygulamada Profil → "Hesabı Kalıcı Olarak Sil" veya e-posta yoluyla talep</li>
-        <li><strong>İtiraz hakkı:</strong> Verilerinizin işlenmesine itiraz etme</li>
-        <li><strong>Taşınabilirlik hakkı:</strong> Verilerinizi yapılandırılmış formatta alma</li>
-      </ul>
-      <p>Talepleriniz için: <a href="mailto:support@phyward.com">support@phyward.com</a></p>
-
-      <h2>9. Veri Sorumlusu</h2>
-      <ul>
-        <li><strong>Ad Soyad:</strong> Koray Murat Ertaş</li>
-        <li><strong>Adres:</strong> Pamukkale, Denizli, Türkiye</li>
-        <li><strong>E-posta:</strong> <a href="mailto:support@phyward.com">support@phyward.com</a></li>
-      </ul>
-      <p><em>Not: 6698 sayılı KVKK kapsamında küçük ölçekli veri sorumlusu muafiyeti uygulanmaktadır; VERBİS kaydı zorunluluğu bulunmamaktadır.</em></p>
-
-      <h2>10. Çocukların Gizliliği</h2>
-      <p>Phyward 18 yaşından büyük kullanıcılar için tasarlanmıştır. 18 yaşından küçük bireylerin verilerini bilerek toplamıyoruz.</p>
-    </div>
-
-    <!-- ENGLISH -->
-    <div class="section" id="lang-en">
-      <h2 style="font-size:20px; border-bottom: 2px solid #FFD70040; color:#FFD700;">🇬🇧 English</h2>
-
-      <h2>1. Data We Collect</h2>
-      <ul>
-        <li><strong>Email address</strong> — for registration, login and account management</li>
-        <li><strong>Username / display name</strong> — for profile</li>
-        <li><strong>Device ID</strong> (Android ID) — to prevent multiple accounts and cheating</li>
-        <li><strong>Device fingerprint</strong> — anti-fraud verification (model, platform, app version)</li>
-        <li><strong>IP address</strong> — processed via ip-api.com for VPN/proxy detection</li>
-        <li><strong>Advertising ID (AD_ID)</strong> — for personalized ads via Google AdMob, Unity Ads, and Pangle</li>
-        <li><strong>Game and task history</strong> — rewards earned, games played, online activity</li>
-        <li><strong>Gift card delivery email</strong> — email entered at checkout for card delivery</li>
-        <li><strong>Referral code usage</strong> — which user invited you</li>
-      </ul>
-
-      <h2>2. How We Use Your Data</h2>
-      <ul>
-        <li>Account creation and authentication</li>
-        <li>Multi-account and fraud prevention (device ID and fingerprint)</li>
-        <li>VPN/proxy detection to prevent ad fraud</li>
-        <li>Personalized ad delivery (AdMob, Unity Ads, Pangle)</li>
-        <li>Processing gift card deliveries</li>
-        <li>Improving app performance and security</li>
-        <li>Fulfilling legal obligations (KVKK, GDPR)</li>
-      </ul>
-
-      <h2>3. Third-Party Data Sharing</h2>
-      <ul>
-        <li><strong>Supabase</strong> — database and authentication infrastructure (US-based, under SCCs)</li>
-        <li><strong>Google AdMob</strong> — advertising services and mediation (uses AD_ID)</li>
-        <li><strong>Unity Ads</strong> (Unity Technologies) — ads served via AdMob mediation; uses device info and advertising ID. <a href="https://unity.com/legal/privacy-policy" target="_blank">Privacy Policy</a></li>
-        <li><strong>Pangle</strong> (TikTok for Business) — ads served via AdMob mediation; uses device info and advertising ID. <a href="https://www.pangleglobal.com/privacy/enduser-en" target="_blank">Privacy Policy</a></li>
-        <li><strong>Sentry</strong> — crash and error monitoring (anonymous error reports; no personal data such as email)</li>
-        <li><strong>ip-api.com</strong> — VPN/proxy detection (IP is sent, no personal data stored)</li>
-        <li><strong>BitLabs</strong> (web.bitlabs.ai) — survey services; user ID passed as URL parameter</li>
-      </ul>
-      <p>Your data is <strong>never sold</strong> to third parties.</p>
-
-      <h2>4. Advertising ID (AD_ID) &amp; Ad Networks</h2>
-      <p>Phyward uses multiple ad networks via Google AdMob mediation: <strong>Google AdMob</strong>, <strong>Unity Ads</strong>, and <strong>Pangle (TikTok for Business)</strong>. These networks may process your Android Advertising ID (AD_ID) and device information for ad targeting. You can disable ad personalization in Android settings; contextual (non-personalized) ads may still be shown.</p>
-
-      <h2>5. Gift Card Data</h2>
-      <p>The email address you enter when purchasing a gift card is stored solely for delivery purposes and is not used for marketing.</p>
-
-      <h2>6. Data Security</h2>
-      <p>Your data is stored encrypted on Supabase infrastructure with Row Level Security (RLS) policies. Device IDs and user data are never sold to third parties.</p>
-
-      <h2>7. Data Retention</h2>
-      <p>If you delete your account, your personal data is <strong>immediately anonymized</strong> and permanently removed within 30 days. Anonymous device records for fraud detection may be retained for 90 days.</p>
-
-      <h2>8. Your Rights (KVKK / GDPR)</h2>
-      <ul>
-        <li><strong>Access:</strong> Learn what data we hold about you</li>
-        <li><strong>Rectification:</strong> Correct inaccurate or incomplete data</li>
-        <li><strong>Erasure:</strong> Delete your account via Profile → "Delete Account Permanently" or by email</li>
-        <li><strong>Objection:</strong> Object to processing of your data</li>
-        <li><strong>Portability:</strong> Receive your data in a structured format</li>
-      </ul>
-      <p>Contact us at: <a href="mailto:support@phyward.com">support@phyward.com</a></p>
-
-      <h2>9. Data Controller</h2>
-      <ul>
-        <li><strong>Name:</strong> Koray Murat Ertaş</li>
-        <li><strong>Address:</strong> Pamukkale, Denizli, Turkey</li>
-        <li><strong>Email:</strong> <a href="mailto:support@phyward.com">support@phyward.com</a></li>
-      </ul>
-
-      <h2>10. Children's Privacy</h2>
-      <p>Phyward is designed for users aged 18 and over. We do not knowingly collect data from individuals under 18.</p>
-    </div>
-
-    <!-- ESPAÑOL -->
-    <div class="section" id="lang-es">
-      <h2 style="font-size:20px; border-bottom: 2px solid #FFD70040; color:#FFD700;">🇪🇸 Español</h2>
-
-      <h2>1. Datos que Recopilamos</h2>
-      <ul>
-        <li><strong>Correo electrónico</strong> — para registro, inicio de sesión y gestión de cuenta</li>
-        <li><strong>Nombre de usuario</strong> — para el perfil</li>
-        <li><strong>ID de dispositivo</strong> (Android ID) — para prevenir múltiples cuentas y fraude</li>
-        <li><strong>Huella digital del dispositivo</strong> — verificación antifraude</li>
-        <li><strong>Dirección IP</strong> — procesada a través de ip-api.com para detección de VPN/proxy</li>
-        <li><strong>ID de publicidad (AD_ID)</strong> — para anuncios personalizados de Google AdMob, Unity Ads y Pangle</li>
-        <li><strong>Historial de juegos y tareas</strong> — recompensas ganadas, actividad en línea</li>
-        <li><strong>Correo de entrega de tarjeta regalo</strong> — email ingresado al comprar para la entrega</li>
-        <li><strong>Uso de código de referido</strong> — qué usuario te invitó</li>
-      </ul>
-
-      <h2>2. Cómo Usamos tus Datos</h2>
-      <ul>
-        <li>Creación de cuenta y autenticación</li>
-        <li>Prevención de fraude y múltiples cuentas</li>
-        <li>Detección de VPN/proxy para prevenir fraude publicitario</li>
-        <li>Entrega de anuncios personalizados (AdMob, Unity Ads, Pangle)</li>
-        <li>Procesamiento de entregas de tarjetas regalo</li>
-        <li>Mejora del rendimiento y seguridad</li>
-        <li>Cumplimiento de obligaciones legales (KVKK, RGPD)</li>
-      </ul>
-
-      <h2>3. Compartir Datos con Terceros</h2>
-      <ul>
-        <li><strong>Supabase</strong> — infraestructura de base de datos (EE.UU., bajo SCCs)</li>
-        <li><strong>Google AdMob</strong> — servicios de publicidad y mediación (usa AD_ID)</li>
-        <li><strong>Unity Ads</strong> (Unity Technologies) — anuncios a través de mediación AdMob. <a href="https://unity.com/legal/privacy-policy" target="_blank">Política de Privacidad</a></li>
-        <li><strong>Pangle</strong> (TikTok for Business) — anuncios a través de mediación AdMob. <a href="https://www.pangleglobal.com/privacy/enduser-en" target="_blank">Política de Privacidad</a></li>
-        <li><strong>Sentry</strong> — monitoreo de errores anónimos</li>
-        <li><strong>ip-api.com</strong> — detección de VPN/proxy</li>
-        <li><strong>BitLabs</strong> — servicios de encuestas</li>
-      </ul>
-      <p>Tus datos <strong>nunca se venden</strong> a terceros.</p>
-
-      <h2>4. ID de Publicidad y Redes Publicitarias</h2>
-      <p>Phyward utiliza <strong>Google AdMob</strong>, <strong>Unity Ads</strong> y <strong>Pangle (TikTok for Business)</strong> a través de mediación. Puedes desactivar la personalización de anuncios en los ajustes de Android.</p>
-
-      <h2>5. Seguridad y Retención de Datos</h2>
-      <p>Datos cifrados en Supabase con RLS. Al eliminar tu cuenta, los datos se anonimizan inmediatamente y se eliminan en 30 días.</p>
-
-      <h2>6. Tus Derechos (RGPD)</h2>
-      <ul>
-        <li>Acceso, rectificación, supresión, oposición y portabilidad de datos</li>
-        <li>Eliminar cuenta: Perfil → "Eliminar Cuenta Permanentemente" o <a href="mailto:support@phyward.com">support@phyward.com</a></li>
-      </ul>
-
-      <h2>7. Responsable del Tratamiento</h2>
-      <ul>
-        <li><strong>Nombre:</strong> Koray Murat Ertaş — Pamukkale, Denizli, Turquía</li>
-        <li><a href="mailto:support@phyward.com">support@phyward.com</a></li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <p style="color:#FFD700;font-weight:bold;margin-bottom:10px;">Veri Sorumlusu · Data Controller</p>
-      <p><strong>Koray Murat Ertaş</strong> — Pamukkale, Denizli, Türkiye</p>
-      <p><a href="mailto:support@phyward.com">support@phyward.com</a></p>
-      <p style="margin-top:12px;font-size:12px;color:#ffffff60;">
-        Hesap silme / Account deletion: <a href="/delete-account">phyward.com/delete-account</a>
-      </p>
-      <p style="margin-top:8px;font-size:12px;color:#ffffff60;">
-        Kullanım Şartları / Terms: <a href="/terms">phyward.com/terms</a>
-      </p>
-      <p style="margin-top:12px;font-size:12px;color:#ffffff40;">© 2026 Phyward. All rights reserved.</p>
+<!-- ── NAV ────────────────────────────────────────── -->
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="hex">P</div>
+    Phyward
+  </a>
+  <div class="nav-links">
+    <a href="#how" class="t active" data-l="tr">Nasıl Çalışır</a>
+    <a href="#how" class="t" data-l="en">How It Works</a>
+    <a href="#how" class="t" data-l="es">Cómo Funciona</a>
+    <a href="#features" class="t active" data-l="tr">Özellikler</a>
+    <a href="#features" class="t" data-l="en">Features</a>
+    <a href="#features" class="t" data-l="es">Funciones</a>
+    <a href="#download" class="nav-dl nav-dl-desktop t active" data-l="tr">İndir</a>
+    <a href="#download" class="nav-dl nav-dl-desktop t" data-l="en">Download</a>
+    <a href="#download" class="nav-dl nav-dl-desktop t" data-l="es">Descargar</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="lang-nav">
+      <button class="active" onclick="setLang('tr',this)">TR</button>
+      <button onclick="setLang('en',this)">EN</button>
+      <button onclick="setLang('es',this)">ES</button>
     </div>
   </div>
+</nav>
 
-  <script>
-    function showLang(lang, btn) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('lang-' + lang).classList.add('active');
-      if (btn) btn.classList.add('active');
-    }
-  </script>
+<!-- ── HERO ────────────────────────────────────────── -->
+<section class="hero" style="max-width:100%;padding-top:100px;">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span></span>
+        <span class="t active" data-l="tr">Android'de ücretsiz</span>
+        <span class="t" data-l="en">Free on Android</span>
+        <span class="t" data-l="es">Gratis en Android</span>
+      </div>
+
+      <h1>
+        <span class="t active" data-l="tr">Zamanını<br/><em>Ödüle</em><br/>Dönüştür</span>
+        <span class="t" data-l="en">Turn Your<br/>Time Into<br/><em>Rewards</em></span>
+        <span class="t" data-l="es">Convierte<br/>Tu Tiempo<br/>en <em>Recompensas</em></span>
+      </h1>
+
+      <p class="hero-sub">
+        <span class="t active" data-l="tr">Phyward ile her saat ücretsiz Phy kazan. Reklam izle, bilgi yarışmasına katıl, arkadaşlarını davet et — ücretsiz, anlık, güvenli.</span>
+        <span class="t" data-l="en">Earn free Phy every hour with Phyward. Watch ads, join trivia, invite friends — free, instant, secure.</span>
+        <span class="t" data-l="es">Gana Phy gratis cada hora con Phyward. Mira anuncios, participa en trivias, invita amigos — gratis, instantáneo, seguro.</span>
+      </p>
+
+      <div class="hero-cta">
+        <a href="#download" class="btn-primary">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9l.0-.42zM.1 1.14C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46 .1 1.14zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26 .33.19.67.42 1 .9z"/>
+          </svg>
+          <span class="t active" data-l="tr">Google Play'den İndir</span>
+          <span class="t" data-l="en">Get it on Google Play</span>
+          <span class="t" data-l="es">Descargar en Google Play</span>
+        </a>
+      </div>
+      <p class="hero-note">
+        <span class="t active" data-l="tr">Android 7.0+ gerektirir · Tamamen ücretsiz</span>
+        <span class="t" data-l="en">Requires Android 7.0+ · Completely free</span>
+        <span class="t" data-l="es">Requiere Android 7.0+ · Completamente gratis</span>
+      </p>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="coin coin1">⬡</div>
+      <div class="coin coin2">◈</div>
+      <div class="coin coin3">◇</div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-balance">
+          <div class="bal-label">
+            <span class="t active" data-l="tr">Bakiye</span>
+            <span class="t" data-l="en">Balance</span>
+            <span class="t" data-l="es">Saldo</span>
+          </div>
+          <div class="bal-val">1,240</div>
+          <div class="bal-unit">PHY</div>
+        </div>
+        <div class="phone-grid">
+          <div class="phone-card">
+            <div class="pc-icon">⏰</div>
+            <div class="pc-name"><span class="t active" data-l="tr">Saatlik Bonus</span><span class="t" data-l="en">Hourly Bonus</span><span class="t" data-l="es">Bono Hora</span></div>
+            <div class="pc-val">+25 Phy</div>
+          </div>
+          <div class="phone-card">
+            <div class="pc-icon">📺</div>
+            <div class="pc-name"><span class="t active" data-l="tr">Reklam</span><span class="t" data-l="en">Watch Ad</span><span class="t" data-l="es">Ver Anuncio</span></div>
+            <div class="pc-val">+60 Phy</div>
+          </div>
+          <div class="phone-card">
+            <div class="pc-icon">🧠</div>
+            <div class="pc-name"><span class="t active" data-l="tr">Trivia</span><span class="t" data-l="en">Trivia</span><span class="t" data-l="es">Trivia</span></div>
+            <div class="pc-val">+40 Phy</div>
+          </div>
+          <div class="phone-card">
+            <div class="pc-icon">🔥</div>
+            <div class="pc-name"><span class="t active" data-l="tr">Günlük Seri</span><span class="t" data-l="en">Daily Streak</span><span class="t" data-l="es">Racha Diaria</span></div>
+            <div class="pc-val">+100 Phy</div>
+          </div>
+        </div>
+        <div class="phone-status">
+          <div class="ps-dot"></div>
+          <div class="ps-text">
+            <span class="t active" data-l="tr">Hesabınız güvende · VPN korumalı</span>
+            <span class="t" data-l="en">Account secure · VPN protected</span>
+            <span class="t" data-l="es">Cuenta segura · Protección VPN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ────────────────────────────────────────── -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-card">
+      <div class="stat-num">0₺</div>
+      <div class="stat-label">
+        <span class="t active" data-l="tr">Tamamen Ücretsiz</span>
+        <span class="t" data-l="en">Completely Free</span>
+        <span class="t" data-l="es">Completamente Gratis</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">
+        <span class="t active" data-l="tr">Her Saat Ödül</span>
+        <span class="t" data-l="en">Rewards Every Hour</span>
+        <span class="t" data-l="es">Recompensas Cada Hora</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">⚡</div>
+      <div class="stat-label">
+        <span class="t active" data-l="tr">Anlık Hesap Yansıması</span>
+        <span class="t" data-l="en">Instant Credit</span>
+        <span class="t" data-l="es">Crédito Instantáneo</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── HOW IT WORKS ─────────────────────────────────── -->
+<section id="how">
+  <div class="section-tag">
+    <span class="t active" data-l="tr">Nasıl Çalışır?</span>
+    <span class="t" data-l="en">How It Works</span>
+    <span class="t" data-l="es">¿Cómo Funciona?</span>
+  </div>
+  <h2>
+    <span class="t active" data-l="tr">3 Adımda <em>Ödül Kazan</em></span>
+    <span class="t" data-l="en">Earn Rewards in <em>3 Steps</em></span>
+    <span class="t" data-l="es">Gana Recompensas en <em>3 Pasos</em></span>
+  </h2>
+  <p class="section-sub">
+    <span class="t active" data-l="tr">Hesap aç, günlük aktivitelerini tamamla, birikimini çek. Olabildiğince basit.</span>
+    <span class="t" data-l="en">Sign up, complete daily activities, withdraw your earnings. As simple as it gets.</span>
+    <span class="t" data-l="es">Regístrate, completa actividades diarias, retira tus ganancias. Así de simple.</span>
+  </p>
+  <div class="steps-wrap">
+    <div class="steps">
+      <div class="step" data-n="1">
+        <div class="step-icon">📲</div>
+        <h3><span class="t active" data-l="tr">Kayıt Ol</span><span class="t" data-l="en">Sign Up</span><span class="t" data-l="es">Regístrate</span></h3>
+        <p>
+          <span class="t active" data-l="tr">E-posta ile saniyeler içinde hesap oluştur. Kredi kartı, ücret, bekleme süresi yok.</span>
+          <span class="t" data-l="en">Create an account with your email in seconds. No credit card, no fees, no waiting.</span>
+          <span class="t" data-l="es">Crea una cuenta con tu correo en segundos. Sin tarjeta, sin cargos, sin espera.</span>
+        </p>
+      </div>
+      <div class="step" data-n="2">
+        <div class="step-icon">💎</div>
+        <h3><span class="t active" data-l="tr">Phy Kazan</span><span class="t" data-l="en">Earn Phy</span><span class="t" data-l="es">Gana Phy</span></h3>
+        <p>
+          <span class="t active" data-l="tr">Saatlik bonusu al, reklam izle, trivia sorularını yanıtla, her gün girerek seri oluştur.</span>
+          <span class="t" data-l="en">Claim hourly bonuses, watch ads, answer trivia questions, build your daily streak.</span>
+          <span class="t" data-l="es">Reclama bonos horarios, mira anuncios, responde trivias, construye tu racha diaria.</span>
+        </p>
+      </div>
+      <div class="step" data-n="3">
+        <div class="step-icon">🎁</div>
+        <h3><span class="t active" data-l="tr">Ödülünü Al</span><span class="t" data-l="en">Get Rewarded</span><span class="t" data-l="es">Recibe tu Premio</span></h3>
+        <p>
+          <span class="t active" data-l="tr">Biriktirdiğin Phy ile hediye kartları ve ödüller al. Bakiye hesabına anında yansır.</span>
+          <span class="t" data-l="en">Redeem your Phy for gift cards and prizes. Balance reflects instantly in your account.</span>
+          <span class="t" data-l="es">Canjea tu Phy por tarjetas regalo y premios. El saldo se refleja al instante.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ─────────────────────────────────────── -->
+<section id="features">
+  <div class="section-tag">
+    <span class="t active" data-l="tr">Özellikler</span>
+    <span class="t" data-l="en">Features</span>
+    <span class="t" data-l="es">Funciones</span>
+  </div>
+  <h2>
+    <span class="t active" data-l="tr">Her Yoldan <em>Ödül</em></span>
+    <span class="t" data-l="en">Earn from <em>Every Way</em></span>
+    <span class="t" data-l="es">Gana por <em>Cada Vía</em></span>
+  </h2>
+  <p class="section-sub">
+    <span class="t active" data-l="tr">Phyward, birden fazla kazanma yöntemiyle maksimum ödül imkânı sunar.</span>
+    <span class="t" data-l="en">Phyward offers multiple earning methods for maximum reward potential.</span>
+    <span class="t" data-l="es">Phyward ofrece múltiples métodos de ganancia para el máximo potencial de recompensa.</span>
+  </p>
+  <div class="features-grid">
+
+    <div class="feat">
+      <div class="feat-icon">⏰</div>
+      <h3><span class="t active" data-l="tr">Saatlik Bonus</span><span class="t" data-l="en">Hourly Bonus</span><span class="t" data-l="es">Bono por Hora</span></h3>
+      <p>
+        <span class="t active" data-l="tr">Her saat ücretsiz Phy talep et. Günde 24 kez, hiç ücret ödemeden.</span>
+        <span class="t" data-l="en">Claim free Phy every hour. 24 times a day, completely free.</span>
+        <span class="t" data-l="es">Reclama Phy gratis cada hora. 24 veces al día, completamente gratis.</span>
+      </p>
+      <span class="feat-badge green">
+        <span class="t active" data-l="tr">Her Saat</span><span class="t" data-l="en">Every Hour</span><span class="t" data-l="es">Cada Hora</span>
+      </span>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon">📺</div>
+      <h3><span class="t active" data-l="tr">Reklam İzle</span><span class="t" data-l="en">Watch Ads</span><span class="t" data-l="es">Mira Anuncios</span></h3>
+      <p>
+        <span class="t active" data-l="tr">Kısa ödüllü reklamlar izle, her izlemede Phy kazan. Günlük limit dahilinde.</span>
+        <span class="t" data-l="en">Watch short rewarded ads and earn Phy for every view. Within daily limits.</span>
+        <span class="t" data-l="es">Mira anuncios cortos y gana Phy por cada visualización. Con límites diarios.</span>
+      </p>
+      <span class="feat-badge">
+        <span class="t active" data-l="tr">Günlük 15 Reklam</span><span class="t" data-l="en">15 Ads / Day</span><span class="t" data-l="es">15 Anuncios / Día</span>
+      </span>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon">🧠</div>
+      <h3><span class="t active" data-l="tr">Trivia</span><span class="t" data-l="en">Trivia</span><span class="t" data-l="es">Trivia</span></h3>
+      <p>
+        <span class="t active" data-l="tr">Bilgi sorularını doğru yanıtla, her doğru cevap için Phy kazan. Hem eğlen hem kazan.</span>
+        <span class="t" data-l="en">Answer trivia questions correctly and earn Phy for each right answer. Have fun while earning.</span>
+        <span class="t" data-l="es">Responde trivias correctamente y gana Phy por cada acierto. Diviértete ganando.</span>
+      </p>
+      <span class="feat-badge green">
+        <span class="t active" data-l="tr">Eğlenceli</span><span class="t" data-l="en">Fun</span><span class="t" data-l="es">Divertido</span>
+      </span>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon">🔥</div>
+      <h3><span class="t active" data-l="tr">Günlük Seri</span><span class="t" data-l="en">Daily Streak</span><span class="t" data-l="es">Racha Diaria</span></h3>
+      <p>
+        <span class="t active" data-l="tr">Her gün giriş yap, serini büyüt. 7. günde Sürpriz Kutu: 500–3.000 Phy!</span>
+        <span class="t" data-l="en">Log in every day, grow your streak. Day 7 Surprise Box: 500–3,000 Phy!</span>
+        <span class="t" data-l="es">Entra cada día, aumenta tu racha. ¡Día 7, Caja Sorpresa: 500–3.000 Phy!</span>
+      </p>
+      <span class="feat-badge pink">
+        <span class="t active" data-l="tr">7. Gün Sürpriz</span><span class="t" data-l="en">Day 7 Surprise</span><span class="t" data-l="es">Día 7 Sorpresa</span>
+      </span>
+    </div>
+
+    <div class="feat">
+      <div class="feat-icon">👥</div>
+      <h3><span class="t active" data-l="tr">Referans Sistemi</span><span class="t" data-l="en">Referral System</span><span class="t" data-l="es">Sistema de Referidos</span></h3>
+      <p>
+        <span class="t active" data-l="tr">Arkadaşlarını Phyward'a davet et. Her aktif davet için bonus Phy kazan.</span>
+        <span class="t" data-l="en">Invite friends to Phyward. Earn bonus Phy for every active referral.</span>
+        <span class="t" data-l="es">Invita amigos a Phyward. Gana Phy extra por cada referido activo.</span>
+      </p>
+      <span class="feat-badge green">
+        <span class="t active" data-l="tr">Sınırsız</span><span class="t" data-l="en">Unlimited</span><span class="t" data-l="es">Ilimitado</span>
+      </span>
+    </div>
+
+    <div class="feat coming">
+      <div class="feat-icon">🎯</div>
+      <h3>
+        <span class="t active" data-l="tr">Teklif Duvarı</span>
+        <span class="t" data-l="en">Offer Wall</span>
+        <span class="t" data-l="es">Muro de Ofertas</span>
+      </h3>
+      <p>
+        <span class="t active" data-l="tr">Oyun indir, görev tamamla, büyük ödüller kazan. Çok yakında geliyor.</span>
+        <span class="t" data-l="en">Download games, complete tasks, earn big rewards. Coming very soon.</span>
+        <span class="t" data-l="es">Descarga juegos, completa tareas, gana grandes premios. Próximamente.</span>
+      </p>
+      <span class="feat-badge">
+        <span class="t active" data-l="tr">Yakında</span><span class="t" data-l="en">Coming Soon</span><span class="t" data-l="es">Próximamente</span>
+      </span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── DOWNLOAD CTA ──────────────────────────────────── -->
+<div class="cta-section" id="download">
+  <div class="cta-box">
+    <h2>
+      <span class="t active" data-l="tr">Hemen <strong>Ücretsiz</strong> Başla</span>
+      <span class="t" data-l="en">Start <strong>Free</strong> Today</span>
+      <span class="t" data-l="es">Empieza <strong>Gratis</strong> Hoy</span>
+    </h2>
+    <p>
+      <span class="t active" data-l="tr">Phyward'ı indir, hesabını oluştur ve dakikalar içinde Phy kazanmaya başla.</span>
+      <span class="t" data-l="en">Download Phyward, create your account and start earning Phy in minutes.</span>
+      <span class="t" data-l="es">Descarga Phyward, crea tu cuenta y empieza a ganar Phy en minutos.</span>
+    </p>
+    <a href="https://play.google.com/store/apps/details?id=com.phyward" class="store-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="white">
+        <path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9l.0-.42zM.1 1.14C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46 .1 1.14zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26 .33.19.67.42 1 .9z"/>
+      </svg>
+      <div class="store-btn-text">
+        <small>
+          <span class="t active" data-l="tr">Şimdi İndir</span>
+          <span class="t" data-l="en">Get it on</span>
+          <span class="t" data-l="es">Disponible en</span>
+        </small>
+        <strong>Google Play</strong>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ── FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">⬡ Phyward</div>
+    <div class="footer-links">
+      <a href="/privacy.html">
+        <span class="t active" data-l="tr">Gizlilik</span>
+        <span class="t" data-l="en">Privacy</span>
+        <span class="t" data-l="es">Privacidad</span>
+      </a>
+      <a href="/terms.html">
+        <span class="t active" data-l="tr">Kullanım Şartları</span>
+        <span class="t" data-l="en">Terms</span>
+        <span class="t" data-l="es">Términos</span>
+      </a>
+      <a href="/delete-account.html">
+        <span class="t active" data-l="tr">Hesap Silme</span>
+        <span class="t" data-l="en">Delete Account</span>
+        <span class="t" data-l="es">Eliminar Cuenta</span>
+      </a>
+      <a href="mailto:support@phyward.com">support@phyward.com</a>
+    </div>
+    <div class="footer-copy">Phyward © 2026</div>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang, btn) {
+    document.querySelectorAll('[data-l]').forEach(el => {
+      el.classList.toggle('active', el.dataset.l === lang);
+    });
+    document.querySelectorAll('.lang-nav button').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
+
+  // Intersection observer for subtle entrance animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.style.opacity = '1', e.target.style.transform = 'translateY(0)';
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step, .feat, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
-<div style="text-align: center; margin-top: 40px; padding: 20px;">
-  <a href="terms.html" style="color: #8B5CF6; text-decoration: none; font-weight: bold;">Kullanım Şartları / Terms of Service</a>
-</div>

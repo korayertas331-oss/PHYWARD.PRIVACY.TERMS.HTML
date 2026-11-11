@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phyward — Hesap Silme / Account Deletion</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #08040F;
+      color: #e0e0e0;
+      line-height: 1.7;
+      padding: 0 16px;
+      min-height: 100vh;
+    }
+    .container { max-width: 480px; width: 100%; margin: 0 auto; padding: 40px 0 80px; }
+    .logo { text-align: center; margin-bottom: 8px; font-size: 36px; }
+    .brand { text-align: center; color: #FFD700; font-size: 24px; font-weight: 900; margin-bottom: 4px; }
+    .page-title { text-align: center; color: #e0e0e0; font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .subtitle { text-align: center; color: #ffffff60; font-size: 13px; margin-bottom: 28px; }
+    .warning-box {
+      background: #FF2DAF10;
+      border: 1px solid #FF2DAF40;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      color: #ffaacc;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; color: #ffffffaa; font-size: 13px; margin-bottom: 6px; font-weight: 600; }
+    input {
+      width: 100%;
+      background: #1A0B33;
+      border: 1px solid #8B5CF640;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #e0e0e0;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus { border-color: #8B5CF6; }
+    .btn {
+      width: 100%;
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn:hover:not(:disabled) { opacity: 0.85; }
+    .alert {
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      font-size: 14px;
+      display: none;
+      line-height: 1.5;
+    }
+    .alert.success { background: #22c55e15; border: 1px solid #22c55e40; color: #86efac; }
+    .alert.error   { background: #ef444415; border: 1px solid #ef444440; color: #fca5a5; }
+    .footer-links { text-align: center; margin-top: 32px; font-size: 12px; color: #ffffff40; }
+    .footer-links a { color: #8B5CF6; text-decoration: none; }
+    .footer-links a:hover { text-decoration: underline; }
+    .lang-switch {
+      display: flex; gap: 10px; justify-content: center; margin-bottom: 28px;
+    }
+    .lang-btn {
+      background: transparent; border: 1px solid #8B5CF640; color: #B79CE0;
+      padding: 5px 14px; border-radius: 20px; cursor: pointer; font-size: 12px;
+      font-family: inherit;
+    }
+    .lang-btn.active { background: #8B5CF6; color: #fff; border-color: #8B5CF6; }
+    .t { display: none; }
+    .t.active { display: inline; }
+    .tb { display: none; }
+    .tb.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">⚡</div>
+    <div class="brand">Phyward</div>
+
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('tr',this)">Türkçe</button>
+      <button class="lang-btn" onclick="setLang('en',this)">English</button>
+      <button class="lang-btn" onclick="setLang('es',this)">Español</button>
+    </div>
+
+    <div class="page-title">
+      <span class="t active" data-l="tr">Hesabı Sil</span>
+      <span class="t" data-l="en">Delete Account</span>
+      <span class="t" data-l="es">Eliminar Cuenta</span>
+    </div>
+    <p class="subtitle">
+      <span class="t active" data-l="tr">Hesabınızı silmek için giriş yapın ve onaylayın.</span>
+      <span class="t" data-l="en">Sign in and confirm to permanently delete your account.</span>
+      <span class="t" data-l="es">Inicia sesión y confirma para eliminar tu cuenta de forma permanente.</span>
+    </p>
+
+    <div class="warning-box">
+      <span class="t active" data-l="tr">
+        ⚠️ <strong>Dikkat:</strong> Bu işlem geri alınamaz. Tüm kişisel verileriniz
+        anonimleştirilir ve birikmiş Phy bakiyeniz kalıcı olarak silinir. İşlem anında gerçekleşir.
+      </span>
+      <span class="t" data-l="en">
+        ⚠️ <strong>Warning:</strong> This action is irreversible. All your personal data will be
+        anonymized and your Phy balance will be permanently deleted. The deletion happens immediately.
+      </span>
+      <span class="t" data-l="es">
+        ⚠️ <strong>Atención:</strong> Esta acción es irreversible. Todos tus datos personales
+        serán anonimizados y tu saldo Phy será eliminado permanentemente. La eliminación ocurre de inmediato.
+      </span>
+    </div>
+
+    <form id="deleteForm" onsubmit="submitDelete(event)">
+      <div class="form-group">
+        <label for="emailInput">
+          <span class="t active" data-l="tr">E-posta Adresiniz</span>
+          <span class="t" data-l="en">Email Address</span>
+          <span class="t" data-l="es">Correo Electrónico</span>
+        </label>
+        <input type="email" id="emailInput" required autocomplete="email"
+          placeholder="ornek@email.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="passwordInput">
+          <span class="t active" data-l="tr">Şifreniz</span>
+          <span class="t" data-l="en">Password</span>
+          <span class="t" data-l="es">Contraseña</span>
+        </label>
+        <input type="password" id="passwordInput" required autocomplete="current-password"
+          placeholder="••••••••" />
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn">
+        <span class="t active" data-l="tr">Hesabımı Kalıcı Olarak Sil</span>
+        <span class="t" data-l="en">Permanently Delete My Account</span>
+        <span class="t" data-l="es">Eliminar Mi Cuenta Permanentemente</span>
+      </button>
+    </form>
+
+    <div class="alert success" id="alertSuccess">
+      <span class="t active" data-l="tr">
+        ✓ Hesabınız başarıyla silindi. Tüm verileriniz kaldırıldı.
+      </span>
+      <span class="t" data-l="en">
+        ✓ Your account has been successfully deleted. All your data has been removed.
+      </span>
+      <span class="t" data-l="es">
+        ✓ Tu cuenta ha sido eliminada exitosamente. Todos tus datos han sido eliminados.
+      </span>
+    </div>
+    <div class="alert error" id="alertError"></div>
+
+    <div class="footer-links">
+      <a href="/privacy.html">
+        <span class="t active" data-l="tr">Gizlilik Politikası</span>
+        <span class="t" data-l="en">Privacy Policy</span>
+        <span class="t" data-l="es">Política de Privacidad</span>
+      </a>
+      &nbsp;·&nbsp;
+      <a href="/terms.html">
+        <span class="t active" data-l="tr">Kullanım Şartları</span>
+        <span class="t" data-l="en">Terms of Service</span>
+        <span class="t" data-l="es">Términos de Servicio</span>
+      </a>
+      <br /><br />
+      <span>support@phyward.com · Phyward © 2026</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const { createClient } = window.supabase;
+    const sb = createClient(
+      'https://jykdtlybpglxscpwrtkz.supabase.co',
+      'sb_publishable_YnXEtzn5_lRZQezJSA10nA_zszbeQNJ'
+    );
+
+    const ERRORS = {
+      invalid_credentials: {
+        tr: 'E-posta veya şifre hatalı.',
+        en: 'Invalid email or password.',
+        es: 'Correo o contraseña incorrectos.',
+      },
+      generic: {
+        tr: 'Bir hata oluştu. Lütfen tekrar deneyin.',
+        en: 'An error occurred. Please try again.',
+        es: 'Ocurrió un error. Por favor intenta de nuevo.',
+      },
+    };
+
+    let currentLang = 'tr';
+
+    function setLang(lang, btn) {
+      currentLang = lang;
+      document.querySelectorAll('[data-l]').forEach(el => {
+        el.classList.toggle('active', el.dataset.l === lang);
+      });
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    async function submitDelete(e) {
+      e.preventDefault();
+      const email    = document.getElementById('emailInput').value.trim();
+      const password = document.getElementById('passwordInput').value;
+      const btn      = document.getElementById('submitBtn');
+      const okEl     = document.getElementById('alertSuccess');
+      const errEl    = document.getElementById('alertError');
+
+      okEl.style.display  = 'none';
+      errEl.style.display = 'none';
+      btn.disabled = true;
+
+      let succeeded = false;
+      try {
+        // 1. Giriş yap
+        const { error: signInError } = await sb.auth.signInWithPassword({ email, password });
+        if (signInError) {
+          errEl.textContent = ERRORS.invalid_credentials[currentLang];
+          errEl.style.display = 'block';
+          return;
+        }
+
+        // 2. Hesabı sil
+        const { data, error: rpcError } = await sb.rpc('delete_my_account');
+        if (rpcError || data?.status === 'error') {
+          errEl.textContent = ERRORS.generic[currentLang];
+          errEl.style.display = 'block';
+          return;
+        }
+
+        succeeded = true;
+        document.getElementById('deleteForm').style.display = 'none';
+        okEl.style.display = 'block';
+      } catch {
+        errEl.textContent = ERRORS.generic[currentLang];
+        errEl.style.display = 'block';
+      } finally {
+        if (!succeeded) btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
