@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script>
+    // Supabase e-posta bağlantıları (şifre sıfırlama / e-posta doğrulama) ana sayfaya gelirse
+    // bilgiyi kaybetmeden ilgili sayfaya yönlendir.
+    (function () {
+      var h = location.hash || '';
+      if (/(^|[#&])(access_token|error_code|error)=/.test(h)) {
+        location.replace('/reset-password.html' + h);
+      }
+    })();
+  </script>
   <title>Phyward — Zamanını Ödüle Dönüştür</title>
   <meta name="description" content="Phyward ile her saat ücretsiz Phy kazan. Reklam izle, trivia çöz, arkadaşlarını davet et."/>
   <meta property="og:title" content="Phyward"/>
