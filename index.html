@@ -1,721 +1,575 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Phyward — Zamanını Ödüle Dönüştür</title>
-  <meta name="description" content="Phyward ile saatlik bonus, reklam izleme ve bilgi yarışmasından Phy kazan. Ücretsiz, anlık, güvenli." />
-  <meta property="og:title" content="Phyward — Zamanını Ödüle Dönüştür" />
-  <meta property="og:description" content="Her saat ücretsiz Phy kazan. Reklam izle, bilgi yarışmasına katıl, arkadaşlarını davet et." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://phyward.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <meta name="description" content="Phyward ile her saat ücretsiz Phy kazan. Reklam izle, trivia çöz, arkadaşlarını davet et."/>
+  <meta property="og:title" content="Phyward"/>
+  <meta property="og:description" content="Zamanını ödüle dönüştür. Ücretsiz, anlık, güvenli."/>
+  <meta property="og:image" content="https://phyward.com/logo.jpg"/>
+  <meta property="og:url" content="https://phyward.com"/>
+  <link rel="icon" href="/logo.jpg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --bg:       #08040F;
-      --surface:  #110720;
-      --card:     #1A0B33;
-      --purple:   #8B5CF6;
-      --gold:     #FFD700;
-      --green:    #00FF88;
-      --pink:     #FF2DAF;
-      --text:     #E8E0F0;
-      --muted:    rgba(255,255,255,.45);
-      --border:   rgba(139,92,246,.2);
-    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #07030E;
+      --bg2: #0D0620;
+      --purple: #9B6DFF;
+      --purple-dim: rgba(155,109,255,.18);
+      --purple-border: rgba(155,109,255,.25);
+      --gold: #F5C842;
+      --green: #22F5A0;
+      --text: #EDE8F5;
+      --muted: rgba(237,232,245,.5);
+      --muted2: rgba(237,232,245,.28);
+      --card: rgba(255,255,255,.04);
+      --card-hover: rgba(255,255,255,.07);
+      --border: rgba(255,255,255,.08);
+    }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── NAVBAR ───────────────────────────────────── */
+    /* ─── NAV ─────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 24px;
-      background: rgba(8,4,15,.85);
-      backdrop-filter: blur(16px);
+      padding: 0 32px; height: 64px;
+      background: rgba(7,3,14,.8);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
       display: flex; align-items: center; gap: 10px;
-      font-weight: 900; font-size: 20px; color: var(--gold);
       text-decoration: none;
     }
-    .nav-logo .hex {
-      width: 36px; height: 36px; background: var(--purple);
-      clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 900; color: #fff;
-    }
-    .nav-links { display: flex; align-items: center; gap: 24px; }
-    .nav-links a {
-      color: var(--muted); font-size: 14px; font-weight: 600;
-      text-decoration: none; transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-dl {
-      background: var(--purple); color: #fff !important;
-      padding: 8px 18px; border-radius: 20px; font-size: 13px !important;
-    }
-    .nav-dl:hover { background: #7C3AED; color: #fff !important; }
-    .lang-nav { display: flex; gap: 6px; }
-    .lang-nav button {
+    .nav-logo img { width: 34px; height: 34px; border-radius: 10px; object-fit: cover; }
+    .nav-logo span { font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -.3px; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .lang-btns { display: flex; gap: 4px; }
+    .lang-btn {
       background: none; border: 1px solid var(--border); color: var(--muted);
-      padding: 4px 10px; border-radius: 12px; cursor: pointer;
-      font-size: 11px; font-family: inherit; font-weight: 600; transition: all .2s;
+      padding: 4px 11px; border-radius: 20px; cursor: pointer;
+      font-size: 11px; font-family: inherit; font-weight: 700;
+      letter-spacing: .4px; transition: all .18s;
     }
-    .lang-nav button.active { background: var(--purple); border-color: var(--purple); color: #fff; }
-    .nav-mobile-dl { display: none; }
+    .lang-btn.active, .lang-btn:hover { background: var(--purple-dim); border-color: var(--purple-border); color: var(--text); }
+    .nav-dl {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--purple); color: #fff;
+      padding: 8px 18px; border-radius: 22px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: opacity .18s, transform .18s;
+    }
+    .nav-dl:hover { opacity: .88; transform: translateY(-1px); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; text-decoration: none; transition: color .18s; }
+    .nav-links a:hover { color: var(--text); }
 
-    /* ── HERO ─────────────────────────────────────── */
+    /* ─── HERO ────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 100px 24px 60px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
       position: relative; overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute; top: -200px; left: -200px;
-      width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,92,246,.15) 0%, transparent 70%);
-      pointer-events: none;
+    .hero-glow {
+      position: absolute; border-radius: 50%; pointer-events: none;
     }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: -150px; right: -150px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,215,0,.08) 0%, transparent 70%);
-      pointer-events: none;
+    .hero-glow-1 {
+      width: 700px; height: 700px;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(155,109,255,.14) 0%, transparent 65%);
     }
-    .hero-inner {
-      max-width: 1100px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    .hero-glow-2 {
+      width: 400px; height: 400px;
+      bottom: 0; right: -100px;
+      background: radial-gradient(circle, rgba(245,200,66,.07) 0%, transparent 70%);
     }
-    .hero-badge {
+    .hero-inner { max-width: 780px; position: relative; z-index: 1; }
+    .hero-pill {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.3);
-      border-radius: 20px; padding: 6px 14px; font-size: 12px;
-      color: var(--purple); font-weight: 700; margin-bottom: 20px;
+      background: var(--purple-dim); border: 1px solid var(--purple-border);
+      border-radius: 100px; padding: 6px 16px 6px 8px;
+      font-size: 12px; font-weight: 600; color: var(--purple);
+      margin-bottom: 28px;
     }
-    .hero-badge span { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+    .hero-pill .dot {
+      width: 20px; height: 20px; background: var(--purple); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+    }
     .hero h1 {
-      font-size: clamp(32px, 5vw, 54px);
-      font-weight: 900; line-height: 1.1; margin-bottom: 20px;
+      font-size: clamp(38px, 7vw, 72px);
+      font-weight: 900; line-height: 1.08; letter-spacing: -1.5px;
+      margin-bottom: 24px;
     }
-    .hero h1 em { font-style: normal; color: var(--purple); }
-    .hero h1 strong { color: var(--gold); font-style: normal; }
-    .hero-sub {
-      font-size: 17px; color: var(--muted); line-height: 1.7;
-      margin-bottom: 36px; max-width: 480px;
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #C084FC 0%, #9B6DFF 40%, #60A5FA 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn-primary {
+    .hero-desc {
+      font-size: 18px; color: var(--muted); line-height: 1.65;
+      max-width: 560px; margin: 0 auto 40px;
+    }
+    .hero-actions { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-gplay {
       display: inline-flex; align-items: center; gap: 10px;
-      background: var(--purple); color: #fff;
-      padding: 14px 28px; border-radius: 14px;
+      background: #fff; color: #000;
+      padding: 13px 26px; border-radius: 14px;
       font-size: 15px; font-weight: 700; text-decoration: none;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 24px rgba(139,92,246,.4);
+      transition: transform .18s, box-shadow .18s;
+      box-shadow: 0 2px 20px rgba(255,255,255,.12);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,.5); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
-      border: 1.5px solid var(--border); color: var(--text);
-      padding: 14px 28px; border-radius: 14px;
-      font-size: 15px; font-weight: 600; text-decoration: none;
-      transition: border-color .2s, background .2s;
-    }
-    .btn-secondary:hover { border-color: var(--purple); background: rgba(139,92,246,.08); }
-    .hero-note { margin-top: 14px; font-size: 12px; color: var(--muted); }
+    .btn-gplay:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,255,255,.18); }
+    .btn-gplay svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .hero-note { margin-top: 20px; font-size: 12px; color: var(--muted2); }
 
-    /* Phone mockup */
-    .phone-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
-    .phone {
-      width: 240px; height: 480px;
-      background: var(--surface);
-      border-radius: 36px;
-      border: 2px solid rgba(139,92,246,.4);
-      box-shadow: 0 0 60px rgba(139,92,246,.2), inset 0 0 20px rgba(0,0,0,.5);
-      padding: 20px 14px;
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column; gap: 10px;
-      animation: float 4s ease-in-out infinite;
+    /* Earn pills */
+    .earn-pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .earn-pill {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 8px 16px;
+      font-size: 13px; font-weight: 600;
     }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-    .phone-notch {
-      width: 60px; height: 8px; background: var(--bg);
-      border-radius: 4px; margin: 0 auto 10px;
-    }
-    .phone-balance {
-      text-align: center; padding: 14px;
-      background: linear-gradient(135deg, rgba(139,92,246,.2), rgba(255,215,0,.1));
-      border-radius: 16px; border: 1px solid rgba(255,215,0,.2);
-    }
-    .phone-balance .bal-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    .phone-balance .bal-val { font-size: 24px; font-weight: 900; color: var(--gold); }
-    .phone-balance .bal-unit { font-size: 10px; color: var(--purple); font-weight: 700; }
-    .phone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .phone-card {
-      background: rgba(139,92,246,.1); border: 1px solid var(--border);
-      border-radius: 12px; padding: 10px 8px; text-align: center;
-    }
-    .phone-card .pc-icon { font-size: 18px; margin-bottom: 4px; }
-    .phone-card .pc-name { font-size: 8px; color: var(--muted); font-weight: 600; }
-    .phone-card .pc-val { font-size: 10px; color: var(--green); font-weight: 700; }
-    .phone-status {
-      background: rgba(0,255,136,.08); border: 1px solid rgba(0,255,136,.2);
-      border-radius: 10px; padding: 8px 10px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .phone-status .ps-dot { width: 7px; height: 7px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
-    .phone-status .ps-text { font-size: 9px; color: var(--green); font-weight: 600; }
-    /* Floating coins */
-    .coin { position: absolute; border-radius: 50%; animation: coinFloat linear infinite; opacity: .7; }
-    .coin1 { width:30px;height:30px;background:var(--gold);top:10%;left:-15%;animation-duration:6s;animation-delay:0s; }
-    .coin2 { width:20px;height:20px;background:var(--purple);top:60%;right:-10%;animation-duration:8s;animation-delay:2s; }
-    .coin3 { width:16px;height:16px;background:var(--green);bottom:15%;left:-8%;animation-duration:7s;animation-delay:1s; }
-    @keyframes coinFloat { 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-20px) rotate(180deg)} 100%{transform:translateY(0) rotate(360deg)} }
+    .earn-pill .ep-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .earn-pill .ep-val { color: var(--gold); font-weight: 800; }
 
-    /* ── STATS BAR ────────────────────────────────── */
-    .stats {
-      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
-    }
-    .stats-inner {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    }
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px; padding: 28px 24px; text-align: center;
-      transition: transform .2s, border-color .2s;
-    }
-    .stat-card:hover { transform: translateY(-4px); border-color: var(--purple); }
-    .stat-num { font-size: 36px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
-    .stat-label { font-size: 14px; color: var(--muted); font-weight: 600; }
-
-    /* ── HOW IT WORKS ─────────────────────────────── */
-    section { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
-    .section-tag {
-      display: inline-block; background: rgba(139,92,246,.12);
-      border: 1px solid rgba(139,92,246,.3); border-radius: 20px;
-      padding: 5px 14px; font-size: 12px; font-weight: 700;
+    /* ─── SECTION BASE ────────────────────────────── */
+    .section { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
       color: var(--purple); margin-bottom: 14px;
     }
-    h2 {
-      font-size: clamp(24px, 4vw, 38px); font-weight: 900;
-      line-height: 1.2; margin-bottom: 12px;
+    .section-title {
+      font-size: clamp(26px, 4vw, 42px); font-weight: 900;
+      letter-spacing: -.8px; line-height: 1.15; margin-bottom: 14px;
     }
-    h2 em { font-style: normal; color: var(--purple); }
-    .section-sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; max-width: 540px; }
-    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .section-desc { font-size: 16px; color: var(--muted); line-height: 1.65; max-width: 520px; margin-bottom: 56px; }
+
+    /* ─── DIVIDER ─────────────────────────────────── */
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ─── STATS ───────────────────────────────────── */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+    }
+    .stat-item {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      transition: background .2s;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item:hover { background: var(--card); }
+    .stat-num { font-size: 40px; font-weight: 900; letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+    .stat-num.purple { color: var(--purple); }
+    .stat-num.gold { color: var(--gold); }
+    .stat-num.green { color: var(--green); }
+    .stat-desc { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+    /* ─── HOW IT WORKS ────────────────────────────── */
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
     .step {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; padding: 32px 24px; position: relative;
-      transition: transform .2s, border-color .2s;
+      border-radius: 20px; padding: 36px 28px;
+      transition: background .2s, border-color .2s, transform .2s;
     }
-    .step:hover { transform: translateY(-4px); border-color: var(--purple); }
-    .step::before {
-      content: attr(data-n);
-      position: absolute; top: -14px; left: 24px;
-      background: var(--purple); color: #fff;
-      width: 28px; height: 28px; border-radius: 50%;
+    .step:hover { background: var(--card-hover); border-color: var(--purple-border); transform: translateY(-3px); }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 10px;
+      background: var(--purple-dim); border: 1px solid var(--purple-border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 900;
+      font-size: 13px; font-weight: 900; color: var(--purple);
+      margin-bottom: 20px;
     }
-    .step-icon { font-size: 36px; margin-bottom: 16px; }
-    .step h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
-    .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-    /* Connector line between steps (desktop) */
-    .steps-wrap { position: relative; }
+    .step-emoji { font-size: 32px; margin-bottom: 16px; }
+    .step h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+    .step p { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
-    /* ── FEATURES ─────────────────────────────────── */
-    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-    .feat {
+    /* ─── EARN GRID ───────────────────────────────── */
+    .earn-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .earn-card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 20px; padding: 28px 24px;
-      transition: transform .2s, border-color .2s;
-    }
-    .feat:hover { transform: translateY(-4px); border-color: var(--purple); }
-    .feat.coming {
-      border-style: dashed; opacity: .7;
-    }
-    .feat-icon {
-      width: 52px; height: 52px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; margin-bottom: 16px;
-      background: rgba(139,92,246,.12); border: 1px solid var(--border);
-    }
-    .feat h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
-    .feat p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-    .feat-badge {
-      display: inline-block; margin-top: 12px;
-      background: rgba(255,215,0,.1); border: 1px solid rgba(255,215,0,.3);
-      color: var(--gold); border-radius: 10px;
-      padding: 3px 10px; font-size: 11px; font-weight: 700;
-    }
-    .feat-badge.green { background: rgba(0,255,136,.1); border-color: rgba(0,255,136,.3); color: var(--green); }
-    .feat-badge.pink  { background: rgba(255,45,175,.1); border-color: rgba(255,45,175,.3); color: var(--pink); }
-
-    /* ── DOWNLOAD CTA ────────────────────────────── */
-    .cta-section {
-      max-width: 1100px; margin: 0 auto; padding: 20px 24px 80px;
-    }
-    .cta-box {
-      background: linear-gradient(135deg, rgba(139,92,246,.15), rgba(255,215,0,.06));
-      border: 1px solid rgba(139,92,246,.3);
-      border-radius: 28px; padding: 60px 40px; text-align: center;
+      transition: background .2s, border-color .2s, transform .2s;
       position: relative; overflow: hidden;
     }
-    .cta-box::before {
-      content: '';
-      position: absolute; top: -100px; right: -100px;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,92,246,.12) 0%, transparent 70%);
+    .earn-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      border-radius: 20px 20px 0 0;
+      background: var(--accent, var(--purple));
+      opacity: 0; transition: opacity .2s;
     }
-    .cta-box h2 { font-size: clamp(24px, 4vw, 40px); margin-bottom: 14px; }
-    .cta-box p { font-size: 17px; color: var(--muted); margin-bottom: 36px; }
-    .store-btn {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: #000; border: 1.5px solid rgba(255,255,255,.15);
-      border-radius: 14px; padding: 12px 24px; color: #fff;
-      text-decoration: none; transition: transform .2s, box-shadow .2s;
+    .earn-card:hover { background: var(--card-hover); border-color: var(--purple-border); transform: translateY(-3px); }
+    .earn-card:hover::before { opacity: 1; }
+    .earn-icon-wrap {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 16px;
+      border: 1px solid var(--border);
     }
-    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
-    .store-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
-    .store-btn-text { text-align: left; }
-    .store-btn-text small { display: block; font-size: 10px; color: rgba(255,255,255,.6); font-weight: 500; }
-    .store-btn-text strong { font-size: 16px; font-weight: 700; }
+    .earn-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .earn-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .earn-tag {
+      display: inline-block; margin-top: 14px;
+      font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px;
+    }
+    .tag-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple-border); }
+    .tag-gold   { background: rgba(245,200,66,.12); color: var(--gold); border: 1px solid rgba(245,200,66,.25); }
+    .tag-green  { background: rgba(34,245,160,.1); color: var(--green); border: 1px solid rgba(34,245,160,.22); }
 
-    /* ── FOOTER ───────────────────────────────────── */
+    /* ─── CTA ─────────────────────────────────────── */
+    .cta-wrap { padding: 0 24px 100px; max-width: 1080px; margin: 0 auto; }
+    .cta-box {
+      border-radius: 28px; padding: 72px 48px; text-align: center;
+      background: linear-gradient(135deg, #1A0B33 0%, #0D0620 60%, #100624 100%);
+      border: 1px solid var(--purple-border);
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .cta-glow-1 {
+      width: 500px; height: 500px; top: -200px; left: 50%; transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(155,109,255,.18) 0%, transparent 65%);
+    }
+    .cta-box .logo-mark {
+      width: 72px; height: 72px; border-radius: 20px; object-fit: cover;
+      margin: 0 auto 24px; display: block;
+      box-shadow: 0 0 40px rgba(155,109,255,.35);
+    }
+    .cta-box h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 900; letter-spacing: -.8px; margin-bottom: 14px; }
+    .cta-box p { font-size: 17px; color: var(--muted); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-box p { margin-bottom: 36px; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 40px 24px;
+      padding: 36px 32px;
     }
     .footer-inner {
-      max-width: 1100px; margin: 0 auto;
+      max-width: 1080px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
+      flex-wrap: wrap; gap: 16px;
     }
-    .footer-logo { font-size: 18px; font-weight: 900; color: var(--gold); }
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
-    .footer-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color .2s; }
+    .footer-logo { display: flex; align-items: center; gap: 9px; }
+    .footer-logo img { width: 26px; height: 26px; border-radius: 7px; object-fit: cover; }
+    .footer-logo span { font-weight: 800; font-size: 15px; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted2); font-size: 13px; text-decoration: none; transition: color .18s; }
     .footer-links a:hover { color: var(--text); }
-    .footer-copy { color: var(--muted); font-size: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted2); }
 
-    /* ── LANG VISIBILITY ─────────────────────────── */
-    .t  { display: none; }
-    .t.active  { display: inline; }
-    .tb { display: none; }
-    .tb.active { display: block; }
+    /* ─── LANG ────────────────────────────────────── */
+    [data-l] { display: none; }
+    [data-l].active { display: inline; }
+    .tb[data-l] { display: none; }
+    .tb[data-l].active { display: block; }
 
-    /* ── RESPONSIVE ──────────────────────────────── */
+    /* ─── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .phone-wrap { order: -1; }
-      .phone { width: 200px; height: 400px; }
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .earn-grid { grid-template-columns: 1fr 1fr; }
       .steps { grid-template-columns: 1fr; }
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .stats-inner { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .cta-box { padding: 48px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
-      .nav-links .nav-dl-desktop { display: none; }
-      .nav-mobile-dl { display: block; }
-      .hero-cta { flex-direction: column; }
     }
     @media (max-width: 480px) {
-      .features-grid { grid-template-columns: 1fr; }
-      .cta-box { padding: 40px 24px; }
-      nav { padding: 12px 16px; }
-      .nav-links { gap: 12px; }
+      .earn-grid { grid-template-columns: 1fr; }
+      .hero h1 { letter-spacing: -.8px; }
+      .nav-dl span { display: none; }
     }
+
+    /* ─── SCROLL ANIMATION ────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ────────────────────────────────────────── -->
+<!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">
-    <div class="hex">P</div>
-    Phyward
+    <img src="/logo.jpg" alt="Phyward"/>
+    <span>Phyward</span>
   </a>
   <div class="nav-links">
-    <a href="#how" class="t active" data-l="tr">Nasıl Çalışır</a>
-    <a href="#how" class="t" data-l="en">How It Works</a>
-    <a href="#how" class="t" data-l="es">Cómo Funciona</a>
-    <a href="#features" class="t active" data-l="tr">Özellikler</a>
-    <a href="#features" class="t" data-l="en">Features</a>
-    <a href="#features" class="t" data-l="es">Funciones</a>
-    <a href="#download" class="nav-dl nav-dl-desktop t active" data-l="tr">İndir</a>
-    <a href="#download" class="nav-dl nav-dl-desktop t" data-l="en">Download</a>
-    <a href="#download" class="nav-dl nav-dl-desktop t" data-l="es">Descargar</a>
+    <a href="#earn" data-l="tr" class="active">Nasıl Kazanılır</a>
+    <a href="#earn" data-l="en">How to Earn</a>
+    <a href="#earn" data-l="es">Cómo Ganar</a>
+    <a href="#download" data-l="tr" class="active">İndir</a>
+    <a href="#download" data-l="en">Download</a>
+    <a href="#download" data-l="es">Descargar</a>
   </div>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <div class="lang-nav">
-      <button class="active" onclick="setLang('tr',this)">TR</button>
-      <button onclick="setLang('en',this)">EN</button>
-      <button onclick="setLang('es',this)">ES</button>
+  <div class="nav-right">
+    <div class="lang-btns">
+      <button class="lang-btn active" onclick="setLang('tr',this)">TR</button>
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('es',this)">ES</button>
     </div>
+    <a href="https://play.google.com/store/apps/details?id=com.phyward" class="nav-dl" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9zm-19.78-9.55C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26z"/></svg>
+      <span data-l="tr" class="active">İndir</span>
+      <span data-l="en">Download</span>
+      <span data-l="es">Descargar</span>
+    </a>
   </div>
 </nav>
 
-<!-- ── HERO ────────────────────────────────────────── -->
-<section class="hero" style="max-width:100%;padding-top:100px;">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
   <div class="hero-inner">
-    <div>
-      <div class="hero-badge">
-        <span></span>
-        <span class="t active" data-l="tr">Android'de ücretsiz</span>
-        <span class="t" data-l="en">Free on Android</span>
-        <span class="t" data-l="es">Gratis en Android</span>
-      </div>
-
-      <h1>
-        <span class="t active" data-l="tr">Zamanını<br/><em>Ödüle</em><br/>Dönüştür</span>
-        <span class="t" data-l="en">Turn Your<br/>Time Into<br/><em>Rewards</em></span>
-        <span class="t" data-l="es">Convierte<br/>Tu Tiempo<br/>en <em>Recompensas</em></span>
-      </h1>
-
-      <p class="hero-sub">
-        <span class="t active" data-l="tr">Phyward ile her saat ücretsiz Phy kazan. Reklam izle, bilgi yarışmasına katıl, arkadaşlarını davet et — ücretsiz, anlık, güvenli.</span>
-        <span class="t" data-l="en">Earn free Phy every hour with Phyward. Watch ads, join trivia, invite friends — free, instant, secure.</span>
-        <span class="t" data-l="es">Gana Phy gratis cada hora con Phyward. Mira anuncios, participa en trivias, invita amigos — gratis, instantáneo, seguro.</span>
-      </p>
-
-      <div class="hero-cta">
-        <a href="#download" class="btn-primary">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-            <path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9l.0-.42zM.1 1.14C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46 .1 1.14zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26 .33.19.67.42 1 .9z"/>
-          </svg>
-          <span class="t active" data-l="tr">Google Play'den İndir</span>
-          <span class="t" data-l="en">Get it on Google Play</span>
-          <span class="t" data-l="es">Descargar en Google Play</span>
-        </a>
-      </div>
-      <p class="hero-note">
-        <span class="t active" data-l="tr">Android 7.0+ gerektirir · Tamamen ücretsiz</span>
-        <span class="t" data-l="en">Requires Android 7.0+ · Completely free</span>
-        <span class="t" data-l="es">Requiere Android 7.0+ · Completamente gratis</span>
-      </p>
+    <div class="hero-pill">
+      <div class="dot">⚡</div>
+      <span data-l="tr" class="active">Android için ücretsiz</span>
+      <span data-l="en">Free for Android</span>
+      <span data-l="es">Gratis para Android</span>
     </div>
 
-    <div class="phone-wrap">
-      <div class="coin coin1">⬡</div>
-      <div class="coin coin2">◈</div>
-      <div class="coin coin3">◇</div>
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-balance">
-          <div class="bal-label">
-            <span class="t active" data-l="tr">Bakiye</span>
-            <span class="t" data-l="en">Balance</span>
-            <span class="t" data-l="es">Saldo</span>
-          </div>
-          <div class="bal-val">1,240</div>
-          <div class="bal-unit">PHY</div>
-        </div>
-        <div class="phone-grid">
-          <div class="phone-card">
-            <div class="pc-icon">⏰</div>
-            <div class="pc-name"><span class="t active" data-l="tr">Saatlik Bonus</span><span class="t" data-l="en">Hourly Bonus</span><span class="t" data-l="es">Bono Hora</span></div>
-            <div class="pc-val">+25 Phy</div>
-          </div>
-          <div class="phone-card">
-            <div class="pc-icon">📺</div>
-            <div class="pc-name"><span class="t active" data-l="tr">Reklam</span><span class="t" data-l="en">Watch Ad</span><span class="t" data-l="es">Ver Anuncio</span></div>
-            <div class="pc-val">+60 Phy</div>
-          </div>
-          <div class="phone-card">
-            <div class="pc-icon">🧠</div>
-            <div class="pc-name"><span class="t active" data-l="tr">Trivia</span><span class="t" data-l="en">Trivia</span><span class="t" data-l="es">Trivia</span></div>
-            <div class="pc-val">+40 Phy</div>
-          </div>
-          <div class="phone-card">
-            <div class="pc-icon">🔥</div>
-            <div class="pc-name"><span class="t active" data-l="tr">Günlük Seri</span><span class="t" data-l="en">Daily Streak</span><span class="t" data-l="es">Racha Diaria</span></div>
-            <div class="pc-val">+100 Phy</div>
-          </div>
-        </div>
-        <div class="phone-status">
-          <div class="ps-dot"></div>
-          <div class="ps-text">
-            <span class="t active" data-l="tr">Hesabınız güvende · VPN korumalı</span>
-            <span class="t" data-l="en">Account secure · VPN protected</span>
-            <span class="t" data-l="es">Cuenta segura · Protección VPN</span>
-          </div>
-        </div>
-      </div>
+    <h1>
+      <span data-l="tr" class="active">Zamanını<br/><span class="grad">Ödüle Dönüştür</span></span>
+      <span data-l="en">Turn Time Into<br/><span class="grad">Real Rewards</span></span>
+      <span data-l="es">Convierte Tu Tiempo<br/>en <span class="grad">Recompensas</span></span>
+    </h1>
+
+    <p class="hero-desc">
+      <span data-l="tr" class="active">Her saat ücretsiz Phy kazan. Reklam izle, trivia çöz, günlük serini koru — ödüllerini hediye kartına dönüştür.</span>
+      <span data-l="en">Earn free Phy every hour. Watch ads, solve trivia, keep your daily streak — redeem for gift cards.</span>
+      <span data-l="es">Gana Phy gratis cada hora. Mira anuncios, resuelve trivias, mantén tu racha — canjea por tarjetas regalo.</span>
+    </p>
+
+    <div class="earn-pills">
+      <div class="earn-pill"><span class="ep-dot" style="background:#9B6DFF"></span> <span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono Hora</span> <span class="ep-val">+25 Phy</span></div>
+      <div class="earn-pill"><span class="ep-dot" style="background:#F5C842"></span> <span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Ver Anuncio</span> <span class="ep-val">+60 Phy</span></div>
+      <div class="earn-pill"><span class="ep-dot" style="background:#22F5A0"></span> <span data-l="tr" class="active">Trivia</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span> <span class="ep-val">+40 Phy</span></div>
+      <div class="earn-pill"><span class="ep-dot" style="background:#F97316"></span> <span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha</span> <span class="ep-val">+100 Phy</span></div>
     </div>
+
+    <div class="hero-actions">
+      <a href="https://play.google.com/store/apps/details?id=com.phyward" class="btn-gplay" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="#000"><path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9zm-19.78-9.55C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26z"/></svg>
+        <span data-l="tr" class="active">Google Play'den İndir</span>
+        <span data-l="en">Get it on Google Play</span>
+        <span data-l="es">Descargar en Google Play</span>
+      </a>
+    </div>
+    <p class="hero-note">
+      <span data-l="tr" class="active">Android 7.0+ · Tamamen ücretsiz · Kayıt zorunlu değil</span>
+      <span data-l="en">Android 7.0+ · Completely free · No subscription</span>
+      <span data-l="es">Android 7.0+ · Gratis · Sin suscripción</span>
+    </p>
   </div>
 </section>
 
-<!-- ── STATS ────────────────────────────────────────── -->
-<div class="stats">
-  <div class="stats-inner">
-    <div class="stat-card">
-      <div class="stat-num">0₺</div>
-      <div class="stat-label">
-        <span class="t active" data-l="tr">Tamamen Ücretsiz</span>
-        <span class="t" data-l="en">Completely Free</span>
-        <span class="t" data-l="es">Completamente Gratis</span>
+<!-- STATS -->
+<div style="max-width:1080px;margin:0 auto;padding:0 24px 80px;">
+  <div class="stats-row fade-up">
+    <div class="stat-item">
+      <div class="stat-num purple">24/7</div>
+      <div class="stat-desc">
+        <span data-l="tr" class="active">Her saat ödül kazan</span>
+        <span data-l="en">Earn rewards every hour</span>
+        <span data-l="es">Gana recompensas cada hora</span>
       </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num">24/7</div>
-      <div class="stat-label">
-        <span class="t active" data-l="tr">Her Saat Ödül</span>
-        <span class="t" data-l="en">Rewards Every Hour</span>
-        <span class="t" data-l="es">Recompensas Cada Hora</span>
+    <div class="stat-item">
+      <div class="stat-num gold">0₺</div>
+      <div class="stat-desc">
+        <span data-l="tr" class="active">Tamamen ücretsiz, her zaman</span>
+        <span data-l="en">Completely free, always</span>
+        <span data-l="es">Completamente gratis, siempre</span>
       </div>
     </div>
-    <div class="stat-card">
-      <div class="stat-num">⚡</div>
-      <div class="stat-label">
-        <span class="t active" data-l="tr">Anlık Hesap Yansıması</span>
-        <span class="t" data-l="en">Instant Credit</span>
-        <span class="t" data-l="es">Crédito Instantáneo</span>
+    <div class="stat-item">
+      <div class="stat-num green">⚡</div>
+      <div class="stat-desc">
+        <span data-l="tr" class="active">Anlık bakiye yansıması</span>
+        <span data-l="en">Instant balance updates</span>
+        <span data-l="es">Saldo actualizado al instante</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ── HOW IT WORKS ─────────────────────────────────── -->
-<section id="how">
-  <div class="section-tag">
-    <span class="t active" data-l="tr">Nasıl Çalışır?</span>
-    <span class="t" data-l="en">How It Works</span>
-    <span class="t" data-l="es">¿Cómo Funciona?</span>
+<!-- HOW IT WORKS -->
+<div class="section" id="how">
+  <div class="section-label">
+    <span data-l="tr" class="active">Nasıl Çalışır?</span>
+    <span data-l="en">How It Works</span>
+    <span data-l="es">¿Cómo Funciona?</span>
   </div>
-  <h2>
-    <span class="t active" data-l="tr">3 Adımda <em>Ödül Kazan</em></span>
-    <span class="t" data-l="en">Earn Rewards in <em>3 Steps</em></span>
-    <span class="t" data-l="es">Gana Recompensas en <em>3 Pasos</em></span>
+  <h2 class="section-title">
+    <span data-l="tr" class="active">3 Adımda Başla</span>
+    <span data-l="en">Get Started in 3 Steps</span>
+    <span data-l="es">Empieza en 3 Pasos</span>
   </h2>
-  <p class="section-sub">
-    <span class="t active" data-l="tr">Hesap aç, günlük aktivitelerini tamamla, birikimini çek. Olabildiğince basit.</span>
-    <span class="t" data-l="en">Sign up, complete daily activities, withdraw your earnings. As simple as it gets.</span>
-    <span class="t" data-l="es">Regístrate, completa actividades diarias, retira tus ganancias. Así de simple.</span>
+  <p class="section-desc">
+    <span data-l="tr" class="active">Hesap aç, günlük aktivitelerini tamamla, birikimini ödüle dönüştür.</span>
+    <span data-l="en">Create an account, complete daily activities, convert your balance to rewards.</span>
+    <span data-l="es">Crea tu cuenta, completa actividades diarias, convierte tu saldo en premios.</span>
   </p>
-  <div class="steps-wrap">
-    <div class="steps">
-      <div class="step" data-n="1">
-        <div class="step-icon">📲</div>
-        <h3><span class="t active" data-l="tr">Kayıt Ol</span><span class="t" data-l="en">Sign Up</span><span class="t" data-l="es">Regístrate</span></h3>
-        <p>
-          <span class="t active" data-l="tr">E-posta ile saniyeler içinde hesap oluştur. Kredi kartı, ücret, bekleme süresi yok.</span>
-          <span class="t" data-l="en">Create an account with your email in seconds. No credit card, no fees, no waiting.</span>
-          <span class="t" data-l="es">Crea una cuenta con tu correo en segundos. Sin tarjeta, sin cargos, sin espera.</span>
-        </p>
-      </div>
-      <div class="step" data-n="2">
-        <div class="step-icon">💎</div>
-        <h3><span class="t active" data-l="tr">Phy Kazan</span><span class="t" data-l="en">Earn Phy</span><span class="t" data-l="es">Gana Phy</span></h3>
-        <p>
-          <span class="t active" data-l="tr">Saatlik bonusu al, reklam izle, trivia sorularını yanıtla, her gün girerek seri oluştur.</span>
-          <span class="t" data-l="en">Claim hourly bonuses, watch ads, answer trivia questions, build your daily streak.</span>
-          <span class="t" data-l="es">Reclama bonos horarios, mira anuncios, responde trivias, construye tu racha diaria.</span>
-        </p>
-      </div>
-      <div class="step" data-n="3">
-        <div class="step-icon">🎁</div>
-        <h3><span class="t active" data-l="tr">Ödülünü Al</span><span class="t" data-l="en">Get Rewarded</span><span class="t" data-l="es">Recibe tu Premio</span></h3>
-        <p>
-          <span class="t active" data-l="tr">Biriktirdiğin Phy ile hediye kartları ve ödüller al. Bakiye hesabına anında yansır.</span>
-          <span class="t" data-l="en">Redeem your Phy for gift cards and prizes. Balance reflects instantly in your account.</span>
-          <span class="t" data-l="es">Canjea tu Phy por tarjetas regalo y premios. El saldo se refleja al instante.</span>
-        </p>
-      </div>
+  <div class="steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-emoji">📲</div>
+      <h3><span data-l="tr" class="active">İndir & Kayıt Ol</span><span data-l="en">Download & Sign Up</span><span data-l="es">Descarga y Regístrate</span></h3>
+      <p><span data-l="tr" class="active">Google Play'den ücretsiz indir, e-posta ile saniyeler içinde hesap oluştur. Kredi kartı veya ücret yok.</span><span data-l="en">Download free from Google Play, create an account with your email in seconds. No credit card or fees.</span><span data-l="es">Descarga gratis desde Google Play, crea una cuenta con tu correo en segundos. Sin tarjeta ni cargos.</span></p>
+    </div>
+    <div class="step fade-up" style="transition-delay:.1s">
+      <div class="step-num">02</div>
+      <div class="step-emoji">💎</div>
+      <h3><span data-l="tr" class="active">Phy Kazan</span><span data-l="en">Earn Phy</span><span data-l="es">Gana Phy</span></h3>
+      <p><span data-l="tr" class="active">Saatlik bonusu al, kısa reklamlar izle, trivia sorularını yanıtla. Her gün giriş yaparak seri bonusu kazan.</span><span data-l="en">Claim hourly bonuses, watch short ads, answer trivia questions. Log in daily to earn streak bonuses.</span><span data-l="es">Reclama bonos horarios, mira anuncios, responde trivias. Entra cada día para ganar bonos de racha.</span></p>
+    </div>
+    <div class="step fade-up" style="transition-delay:.2s">
+      <div class="step-num">03</div>
+      <div class="step-emoji">🎁</div>
+      <h3><span data-l="tr" class="active">Ödülünü Al</span><span data-l="en">Claim Your Reward</span><span data-l="es">Recibe Tu Premio</span></h3>
+      <p><span data-l="tr" class="active">Biriktirdiğin Phy ile Amazon, Steam, Google Play gibi platformlara hediye kartı al. Bakiye anında yansır.</span><span data-l="en">Use your Phy to get gift cards for Amazon, Steam, Google Play and more. Balance reflects instantly.</span><span data-l="es">Usa tu Phy para obtener tarjetas regalo de Amazon, Steam, Google Play y más. Saldo al instante.</span></p>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ── FEATURES ─────────────────────────────────────── -->
-<section id="features">
-  <div class="section-tag">
-    <span class="t active" data-l="tr">Özellikler</span>
-    <span class="t" data-l="en">Features</span>
-    <span class="t" data-l="es">Funciones</span>
+<!-- EARN WAYS -->
+<div class="section" id="earn">
+  <div class="section-label">
+    <span data-l="tr" class="active">Kazanma Yolları</span>
+    <span data-l="en">Ways to Earn</span>
+    <span data-l="es">Formas de Ganar</span>
   </div>
-  <h2>
-    <span class="t active" data-l="tr">Her Yoldan <em>Ödül</em></span>
-    <span class="t" data-l="en">Earn from <em>Every Way</em></span>
-    <span class="t" data-l="es">Gana por <em>Cada Vía</em></span>
+  <h2 class="section-title">
+    <span data-l="tr" class="active">Her Yoldan Ödül</span>
+    <span data-l="en">Earn from Every Direction</span>
+    <span data-l="es">Gana por Todos los Caminos</span>
   </h2>
-  <p class="section-sub">
-    <span class="t active" data-l="tr">Phyward, birden fazla kazanma yöntemiyle maksimum ödül imkânı sunar.</span>
-    <span class="t" data-l="en">Phyward offers multiple earning methods for maximum reward potential.</span>
-    <span class="t" data-l="es">Phyward ofrece múltiples métodos de ganancia para el máximo potencial de recompensa.</span>
+  <p class="section-desc">
+    <span data-l="tr" class="active">Birden fazla kazanma yöntemi — her gün daha fazla Phy biriktir.</span>
+    <span data-l="en">Multiple earning methods — stack more Phy every single day.</span>
+    <span data-l="es">Múltiples métodos de ganancia — acumula más Phy cada día.</span>
   </p>
-  <div class="features-grid">
+  <div class="earn-grid">
 
-    <div class="feat">
-      <div class="feat-icon">⏰</div>
-      <h3><span class="t active" data-l="tr">Saatlik Bonus</span><span class="t" data-l="en">Hourly Bonus</span><span class="t" data-l="es">Bono por Hora</span></h3>
-      <p>
-        <span class="t active" data-l="tr">Her saat ücretsiz Phy talep et. Günde 24 kez, hiç ücret ödemeden.</span>
-        <span class="t" data-l="en">Claim free Phy every hour. 24 times a day, completely free.</span>
-        <span class="t" data-l="es">Reclama Phy gratis cada hora. 24 veces al día, completamente gratis.</span>
-      </p>
-      <span class="feat-badge green">
-        <span class="t active" data-l="tr">Her Saat</span><span class="t" data-l="en">Every Hour</span><span class="t" data-l="es">Cada Hora</span>
-      </span>
+    <div class="earn-card fade-up" style="--accent:#9B6DFF">
+      <div class="earn-icon-wrap" style="background:rgba(155,109,255,.12)">⏰</div>
+      <h3><span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono por Hora</span></h3>
+      <p><span data-l="tr" class="active">Her saat ücretsiz Phy talep et. Günde 24 kez, hiç ücret ödemeden.</span><span data-l="en">Claim free Phy every hour, 24 times a day, completely free.</span><span data-l="es">Reclama Phy gratis cada hora, 24 veces al día, sin costo.</span></p>
+      <span class="earn-tag tag-purple"><span data-l="tr" class="active">Her Saat</span><span data-l="en">Every Hour</span><span data-l="es">Cada Hora</span></span>
     </div>
 
-    <div class="feat">
-      <div class="feat-icon">📺</div>
-      <h3><span class="t active" data-l="tr">Reklam İzle</span><span class="t" data-l="en">Watch Ads</span><span class="t" data-l="es">Mira Anuncios</span></h3>
-      <p>
-        <span class="t active" data-l="tr">Kısa ödüllü reklamlar izle, her izlemede Phy kazan. Günlük limit dahilinde.</span>
-        <span class="t" data-l="en">Watch short rewarded ads and earn Phy for every view. Within daily limits.</span>
-        <span class="t" data-l="es">Mira anuncios cortos y gana Phy por cada visualización. Con límites diarios.</span>
-      </p>
-      <span class="feat-badge">
-        <span class="t active" data-l="tr">Günlük 15 Reklam</span><span class="t" data-l="en">15 Ads / Day</span><span class="t" data-l="es">15 Anuncios / Día</span>
-      </span>
+    <div class="earn-card fade-up" style="--accent:#F5C842;transition-delay:.05s">
+      <div class="earn-icon-wrap" style="background:rgba(245,200,66,.1)">📺</div>
+      <h3><span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Mira Anuncios</span></h3>
+      <p><span data-l="tr" class="active">Kısa ödüllü reklamlar izle, her izlemede Phy kazan. Günlük 15 reklam hakkı.</span><span data-l="en">Watch short rewarded ads and earn Phy each time. Up to 15 ads per day.</span><span data-l="es">Mira anuncios cortos y gana Phy cada vez. Hasta 15 anuncios al día.</span></p>
+      <span class="earn-tag tag-gold"><span data-l="tr" class="active">15 Reklam / Gün</span><span data-l="en">15 Ads / Day</span><span data-l="es">15 Anuncios / Día</span></span>
     </div>
 
-    <div class="feat">
-      <div class="feat-icon">🧠</div>
-      <h3><span class="t active" data-l="tr">Trivia</span><span class="t" data-l="en">Trivia</span><span class="t" data-l="es">Trivia</span></h3>
-      <p>
-        <span class="t active" data-l="tr">Bilgi sorularını doğru yanıtla, her doğru cevap için Phy kazan. Hem eğlen hem kazan.</span>
-        <span class="t" data-l="en">Answer trivia questions correctly and earn Phy for each right answer. Have fun while earning.</span>
-        <span class="t" data-l="es">Responde trivias correctamente y gana Phy por cada acierto. Diviértete ganando.</span>
-      </p>
-      <span class="feat-badge green">
-        <span class="t active" data-l="tr">Eğlenceli</span><span class="t" data-l="en">Fun</span><span class="t" data-l="es">Divertido</span>
-      </span>
+    <div class="earn-card fade-up" style="--accent:#22F5A0;transition-delay:.1s">
+      <div class="earn-icon-wrap" style="background:rgba(34,245,160,.08)">🧠</div>
+      <h3><span data-l="tr" class="active">Bilgi Yarışması</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span></h3>
+      <p><span data-l="tr" class="active">Matematik, spor, teknoloji, coğrafya ve daha fazla kategoride sorular çöz, Phy kazan.</span><span data-l="en">Solve questions in math, sports, technology, geography and more to earn Phy.</span><span data-l="es">Resuelve preguntas de matemáticas, deportes, tecnología, geografía y más.</span></p>
+      <span class="earn-tag tag-green"><span data-l="tr" class="active">7 Kategori</span><span data-l="en">7 Categories</span><span data-l="es">7 Categorías</span></span>
     </div>
 
-    <div class="feat">
-      <div class="feat-icon">🔥</div>
-      <h3><span class="t active" data-l="tr">Günlük Seri</span><span class="t" data-l="en">Daily Streak</span><span class="t" data-l="es">Racha Diaria</span></h3>
-      <p>
-        <span class="t active" data-l="tr">Her gün giriş yap, serini büyüt. 7. günde Sürpriz Kutu: 500–3.000 Phy!</span>
-        <span class="t" data-l="en">Log in every day, grow your streak. Day 7 Surprise Box: 500–3,000 Phy!</span>
-        <span class="t" data-l="es">Entra cada día, aumenta tu racha. ¡Día 7, Caja Sorpresa: 500–3.000 Phy!</span>
-      </p>
-      <span class="feat-badge pink">
-        <span class="t active" data-l="tr">7. Gün Sürpriz</span><span class="t" data-l="en">Day 7 Surprise</span><span class="t" data-l="es">Día 7 Sorpresa</span>
-      </span>
+    <div class="earn-card fade-up" style="--accent:#F97316;transition-delay:.15s">
+      <div class="earn-icon-wrap" style="background:rgba(249,115,22,.1)">🔥</div>
+      <h3><span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha Diaria</span></h3>
+      <p><span data-l="tr" class="active">Her gün giriş yaparak seri oluştur. 7. gün Sürpriz Kutu: 500–3.000 Phy kazanabilirsin!</span><span data-l="en">Log in every day to build your streak. Day 7 Surprise Box: 500–3,000 Phy!</span><span data-l="es">Entra cada día para tu racha. ¡Día 7 Caja Sorpresa: 500–3.000 Phy!</span></p>
+      <span class="earn-tag" style="background:rgba(249,115,22,.12);color:#F97316;border:1px solid rgba(249,115,22,.25)"><span data-l="tr" class="active">7. Gün Sürpriz</span><span data-l="en">Day 7 Surprise</span><span data-l="es">Día 7 Sorpresa</span></span>
     </div>
 
-    <div class="feat">
-      <div class="feat-icon">👥</div>
-      <h3><span class="t active" data-l="tr">Referans Sistemi</span><span class="t" data-l="en">Referral System</span><span class="t" data-l="es">Sistema de Referidos</span></h3>
-      <p>
-        <span class="t active" data-l="tr">Arkadaşlarını Phyward'a davet et. Her aktif davet için bonus Phy kazan.</span>
-        <span class="t" data-l="en">Invite friends to Phyward. Earn bonus Phy for every active referral.</span>
-        <span class="t" data-l="es">Invita amigos a Phyward. Gana Phy extra por cada referido activo.</span>
-      </p>
-      <span class="feat-badge green">
-        <span class="t active" data-l="tr">Sınırsız</span><span class="t" data-l="en">Unlimited</span><span class="t" data-l="es">Ilimitado</span>
-      </span>
+    <div class="earn-card fade-up" style="--accent:#38BDF8;transition-delay:.2s">
+      <div class="earn-icon-wrap" style="background:rgba(56,189,248,.08)">👥</div>
+      <h3><span data-l="tr" class="active">Arkadaşını Davet Et</span><span data-l="en">Refer Friends</span><span data-l="es">Invita Amigos</span></h3>
+      <p><span data-l="tr" class="active">Referans bağlantını paylaş, her kayıt için bonus Phy kazan. Maksimum 10 davet ödülü.</span><span data-l="en">Share your referral link, earn bonus Phy for every signup. Up to 10 referral rewards.</span><span data-l="es">Comparte tu enlace, gana Phy extra por cada registro. Hasta 10 recompensas.</span></p>
+      <span class="earn-tag" style="background:rgba(56,189,248,.1);color:#38BDF8;border:1px solid rgba(56,189,248,.22)"><span data-l="tr" class="active">Max 10 Davet</span><span data-l="en">Up to 10 Referrals</span><span data-l="es">Hasta 10 Referidos</span></span>
     </div>
 
-    <div class="feat coming">
-      <div class="feat-icon">🎯</div>
-      <h3>
-        <span class="t active" data-l="tr">Teklif Duvarı</span>
-        <span class="t" data-l="en">Offer Wall</span>
-        <span class="t" data-l="es">Muro de Ofertas</span>
-      </h3>
-      <p>
-        <span class="t active" data-l="tr">Oyun indir, görev tamamla, büyük ödüller kazan. Çok yakında geliyor.</span>
-        <span class="t" data-l="en">Download games, complete tasks, earn big rewards. Coming very soon.</span>
-        <span class="t" data-l="es">Descarga juegos, completa tareas, gana grandes premios. Próximamente.</span>
-      </p>
-      <span class="feat-badge">
-        <span class="t active" data-l="tr">Yakında</span><span class="t" data-l="en">Coming Soon</span><span class="t" data-l="es">Próximamente</span>
-      </span>
+    <div class="earn-card fade-up" style="--accent:#A78BFA;transition-delay:.25s;opacity:.65">
+      <div class="earn-icon-wrap" style="background:rgba(167,139,250,.08)">🎯</div>
+      <h3><span data-l="tr" class="active">Teklif Duvarı</span><span data-l="en">Offer Wall</span><span data-l="es">Muro de Ofertas</span></h3>
+      <p><span data-l="tr" class="active">Oyun indir, görev tamamla, büyük ödüller kazan.</span><span data-l="en">Download games, complete tasks, earn big rewards.</span><span data-l="es">Descarga juegos, completa tareas, gana grandes premios.</span></p>
+      <span class="earn-tag tag-purple"><span data-l="tr" class="active">Yakında</span><span data-l="en">Coming Soon</span><span data-l="es">Próximamente</span></span>
     </div>
 
   </div>
-</section>
+</div>
 
-<!-- ── DOWNLOAD CTA ──────────────────────────────────── -->
-<div class="cta-section" id="download">
-  <div class="cta-box">
+<!-- CTA -->
+<div class="cta-wrap" id="download">
+  <div class="cta-box fade-up">
+    <div class="cta-glow cta-glow-1"></div>
+    <img src="/logo.jpg" alt="Phyward" class="logo-mark"/>
     <h2>
-      <span class="t active" data-l="tr">Hemen <strong>Ücretsiz</strong> Başla</span>
-      <span class="t" data-l="en">Start <strong>Free</strong> Today</span>
-      <span class="t" data-l="es">Empieza <strong>Gratis</strong> Hoy</span>
+      <span data-l="tr" class="active">Hemen Başla, Ücretsiz</span>
+      <span data-l="en">Start Earning Today, Free</span>
+      <span data-l="es">Empieza Hoy, Gratis</span>
     </h2>
     <p>
-      <span class="t active" data-l="tr">Phyward'ı indir, hesabını oluştur ve dakikalar içinde Phy kazanmaya başla.</span>
-      <span class="t" data-l="en">Download Phyward, create your account and start earning Phy in minutes.</span>
-      <span class="t" data-l="es">Descarga Phyward, crea tu cuenta y empieza a ganar Phy en minutos.</span>
+      <span data-l="tr" class="active">Phyward'ı indir, hesabını oluştur ve dakikalar içinde ilk Phy'ını kazan.</span>
+      <span data-l="en">Download Phyward, create your account and earn your first Phy in minutes.</span>
+      <span data-l="es">Descarga Phyward, crea tu cuenta y gana tu primer Phy en minutos.</span>
     </p>
-    <a href="https://play.google.com/store/apps/details?id=com.phyward" class="store-btn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="white">
-        <path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9l.0-.42zM.1 1.14C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46 .1 1.14zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26 .33.19.67.42 1 .9z"/>
-      </svg>
-      <div class="store-btn-text">
-        <small>
-          <span class="t active" data-l="tr">Şimdi İndir</span>
-          <span class="t" data-l="en">Get it on</span>
-          <span class="t" data-l="es">Disponible en</span>
-        </small>
-        <strong>Google Play</strong>
-      </div>
+    <a href="https://play.google.com/store/apps/details?id=com.phyward" class="btn-gplay" target="_blank" rel="noopener" style="margin:0 auto;display:inline-flex;">
+      <svg viewBox="0 0 24 24" fill="#000"><path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9zm-19.78-9.55C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26z"/></svg>
+      <span data-l="tr" class="active">Google Play'den İndir</span>
+      <span data-l="en">Get it on Google Play</span>
+      <span data-l="es">Descargar en Google Play</span>
     </a>
   </div>
 </div>
 
-<!-- ── FOOTER ───────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">⬡ Phyward</div>
+    <div class="footer-logo">
+      <img src="/logo.jpg" alt="Phyward"/>
+      <span>Phyward</span>
+    </div>
     <div class="footer-links">
-      <a href="/privacy.html">
-        <span class="t active" data-l="tr">Gizlilik</span>
-        <span class="t" data-l="en">Privacy</span>
-        <span class="t" data-l="es">Privacidad</span>
-      </a>
-      <a href="/terms.html">
-        <span class="t active" data-l="tr">Kullanım Şartları</span>
-        <span class="t" data-l="en">Terms</span>
-        <span class="t" data-l="es">Términos</span>
-      </a>
-      <a href="/delete-account.html">
-        <span class="t active" data-l="tr">Hesap Silme</span>
-        <span class="t" data-l="en">Delete Account</span>
-        <span class="t" data-l="es">Eliminar Cuenta</span>
-      </a>
+      <a href="/privacy.html"><span data-l="tr" class="active">Gizlilik</span><span data-l="en">Privacy</span><span data-l="es">Privacidad</span></a>
+      <a href="/terms.html"><span data-l="tr" class="active">Kullanım Şartları</span><span data-l="en">Terms</span><span data-l="es">Términos</span></a>
+      <a href="/delete-account.html"><span data-l="tr" class="active">Hesap Sil</span><span data-l="en">Delete Account</span><span data-l="es">Eliminar Cuenta</span></a>
       <a href="mailto:support@phyward.com">support@phyward.com</a>
     </div>
-    <div class="footer-copy">Phyward © 2026</div>
+    <div class="footer-copy">© 2026 Phyward</div>
   </div>
 </footer>
 
 <script>
+  let currentLang = 'tr';
+
   function setLang(lang, btn) {
+    currentLang = lang;
     document.querySelectorAll('[data-l]').forEach(el => {
       el.classList.toggle('active', el.dataset.l === lang);
     });
-    document.querySelectorAll('.lang-nav button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
   }
 
-  // Intersection observer for subtle entrance animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.style.opacity = '1', e.target.style.transform = 'translateY(0)';
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.step, .feat, .stat-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
+  // Scroll animations
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
