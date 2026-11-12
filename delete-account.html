@@ -29,6 +29,19 @@
       font-size: 13px;
       line-height: 1.6;
     }
+    .data-box {
+      background: #8B5CF60D;
+      border: 1px solid #8B5CF630;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
+      color: #ffffffb0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .data-box strong { color: #e0e0e0; }
+    .data-box ul { margin: 6px 0 12px 18px; }
+    .data-box a { color: #8B5CF6; }
     .form-group { margin-bottom: 16px; }
     label { display: block; color: #ffffffaa; font-size: 13px; margin-bottom: 6px; font-weight: 600; }
     input {
@@ -111,17 +124,74 @@
 
     <div class="warning-box">
       <span class="t active" data-l="tr">
-        ⚠️ <strong>Dikkat:</strong> Bu işlem geri alınamaz. Tüm kişisel verileriniz
-        anonimleştirilir ve birikmiş Phy bakiyeniz kalıcı olarak silinir. İşlem anında gerçekleşir.
+        ⚠️ <strong>Dikkat:</strong> Bu işlem geri alınamaz. Hesabınız ve kişisel verileriniz
+        kalıcı olarak silinir, birikmiş Phy bakiyeniz de silinir. İşlem anında gerçekleşir.
       </span>
       <span class="t" data-l="en">
-        ⚠️ <strong>Warning:</strong> This action is irreversible. All your personal data will be
-        anonymized and your Phy balance will be permanently deleted. The deletion happens immediately.
+        ⚠️ <strong>Warning:</strong> This action is irreversible. Your account and personal data will be
+        permanently deleted, including your Phy balance. The deletion happens immediately.
       </span>
       <span class="t" data-l="es">
-        ⚠️ <strong>Atención:</strong> Esta acción es irreversible. Todos tus datos personales
-        serán anonimizados y tu saldo Phy será eliminado permanentemente. La eliminación ocurre de inmediato.
+        ⚠️ <strong>Atención:</strong> Esta acción es irreversible. Tu cuenta y tus datos personales
+        se eliminarán de forma permanente, incluido tu saldo Phy. La eliminación ocurre de inmediato.
       </span>
+    </div>
+
+    <div class="data-box">
+      <div class="tb active" data-l="tr">
+        <strong>Silinen veriler</strong>
+        <ul>
+          <li>Hesap ve giriş bilgileri (e-posta adresi, şifre)</li>
+          <li>Profil bilgileri (ad, soyad, takma ad, telefon numarası)</li>
+          <li>Phy bakiyesi; soru, görev, reklam ve günlük ödül geçmişi</li>
+          <li>Hediye kartı siparişleri ve teslimat e-postası</li>
+          <li>Bildirimler, davet bilgileri, cihaz ve hile önleme kayıtları</li>
+        </ul>
+        <strong>Saklanan veriler</strong>
+        <ul>
+          <li>Yönetici işlem kayıtlarında kişisel bilgi içermeyen tutar ve tarih bilgisi (muhasebe ve dolandırıcılık önleme amacıyla)</li>
+          <li>VPN kontrolü için IP adresi en fazla 24 saat tutulur ve hesabınızla ilişkilendirilmez</li>
+          <li>Reklam ve analiz ortaklarımızın (Google AdMob vb.) kendi politikalarına göre tuttuğu veriler için ilgili ortağın gizlilik politikası geçerlidir</li>
+        </ul>
+        Silme işlemi anında gerçekleşir. Giriş yapamıyorsanız, hesabınızın e-posta adresinden
+        <a href="mailto:support@phyward.com">support@phyward.com</a> adresine yazın; talebiniz en geç 30 gün içinde tamamlanır.
+      </div>
+      <div class="tb" data-l="en">
+        <strong>Data that is deleted</strong>
+        <ul>
+          <li>Account and sign-in data (email address, password)</li>
+          <li>Profile data (name, surname, nickname, phone number)</li>
+          <li>Phy balance; trivia, task, ad and daily reward history</li>
+          <li>Gift card orders and delivery email</li>
+          <li>Notifications, referral data, device and anti-fraud records</li>
+        </ul>
+        <strong>Data that is kept</strong>
+        <ul>
+          <li>Amount and date entries in administrator transaction logs, without personal information (for accounting and fraud prevention)</li>
+          <li>IP addresses used for VPN checks are kept for at most 24 hours and are not linked to your account</li>
+          <li>Data held by our advertising and analytics partners (e.g. Google AdMob) is governed by their own privacy policies</li>
+        </ul>
+        Deletion happens immediately. If you cannot sign in, email
+        <a href="mailto:support@phyward.com">support@phyward.com</a> from your account's email address; your request will be completed within 30 days.
+      </div>
+      <div class="tb" data-l="es">
+        <strong>Datos que se eliminan</strong>
+        <ul>
+          <li>Datos de cuenta e inicio de sesión (correo electrónico, contraseña)</li>
+          <li>Datos de perfil (nombre, apellido, apodo, número de teléfono)</li>
+          <li>Saldo Phy; historial de trivia, tareas, anuncios y recompensas diarias</li>
+          <li>Pedidos de tarjetas regalo y correo de entrega</li>
+          <li>Notificaciones, datos de invitaciones, registros de dispositivo y antifraude</li>
+        </ul>
+        <strong>Datos que se conservan</strong>
+        <ul>
+          <li>Importe y fecha en los registros de operaciones de administración, sin datos personales (para contabilidad y prevención del fraude)</li>
+          <li>Las direcciones IP usadas para la comprobación de VPN se guardan como máximo 24 horas y no se vinculan a tu cuenta</li>
+          <li>Los datos que conservan nuestros socios de publicidad y análisis (p. ej. Google AdMob) se rigen por sus propias políticas de privacidad</li>
+        </ul>
+        La eliminación es inmediata. Si no puedes iniciar sesión, escribe desde el correo de tu cuenta a
+        <a href="mailto:support@phyward.com">support@phyward.com</a>; tu solicitud se completará en un plazo máximo de 30 días.
+      </div>
     </div>
 
     <form id="deleteForm" onsubmit="submitDelete(event)">
