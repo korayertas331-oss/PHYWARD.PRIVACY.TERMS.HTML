@@ -4,8 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script>
-    // Supabase e-posta bağlantıları (şifre sıfırlama / e-posta doğrulama) ana sayfaya gelirse
-    // bilgiyi kaybetmeden ilgili sayfaya yönlendir.
     (function () {
       var h = location.hash || '';
       if (/(^|[#&])(access_token|error_code|error)=/.test(h)) {
@@ -240,6 +238,19 @@
     .tag-gold   { background: rgba(245,200,66,.12); color: var(--gold); border: 1px solid rgba(245,200,66,.25); }
     .tag-green  { background: rgba(34,245,160,.1); color: var(--green); border: 1px solid rgba(34,245,160,.22); }
 
+    /* ─── DISCLAIMER ──────────────────────────────── */
+    .disclaimer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .disclaimer-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .disclaimer-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .disclaimer-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .disclaimer-card strong { color: var(--text); }
+    .disclaimer-card a { color: var(--purple); text-decoration: none; }
+    .disclaimer-card a:hover { text-decoration: underline; }
+
     /* ─── CTA ─────────────────────────────────────── */
     .cta-wrap { padding: 0 24px 100px; max-width: 1080px; margin: 0 auto; }
     .cta-box {
@@ -299,6 +310,7 @@
       .stat-item:last-child { border-bottom: none; }
       .cta-box { padding: 48px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .disclaimer-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .earn-grid { grid-template-columns: 1fr; }
@@ -367,10 +379,30 @@
     </p>
 
     <div class="earn-pills">
-      <div class="earn-pill"><span class="ep-dot" style="background:#9B6DFF"></span> <span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono Hora</span> <span class="ep-val">+25 Phy</span></div>
-      <div class="earn-pill"><span class="ep-dot" style="background:#F5C842"></span> <span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Ver Anuncio</span> <span class="ep-val">+60 Phy</span></div>
-      <div class="earn-pill"><span class="ep-dot" style="background:#22F5A0"></span> <span data-l="tr" class="active">Trivia</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span> <span class="ep-val">+40 Phy</span></div>
-      <div class="earn-pill"><span class="ep-dot" style="background:#F97316"></span> <span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha</span> <span class="ep-val">+100 Phy</span></div>
+      <div class="earn-pill">
+        <span class="ep-dot" style="background:#9B6DFF"></span>
+        <span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono Hora</span>
+        <span class="ep-val">+50 Phy</span>
+      </div>
+      <div class="earn-pill">
+        <span class="ep-dot" style="background:#F5C842"></span>
+        <span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Ver Anuncio</span>
+        <span class="ep-val">+100 Phy</span>
+      </div>
+      <div class="earn-pill">
+        <span class="ep-dot" style="background:#22F5A0"></span>
+        <span data-l="tr" class="active">Trivia</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span>
+        <span class="ep-val">+15 Phy</span>
+      </div>
+      <div class="earn-pill">
+        <span class="ep-dot" style="background:#F97316"></span>
+        <span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha</span>
+        <span class="ep-val">
+          <span data-l="tr" class="active">500–3.000 Phy</span>
+          <span data-l="en">500–3,000 Phy</span>
+          <span data-l="es">500–3.000 Phy</span>
+        </span>
+      </div>
     </div>
 
     <div class="hero-actions">
@@ -382,9 +414,9 @@
       </a>
     </div>
     <p class="hero-note">
-      <span data-l="tr" class="active">Android 7.0+ · Tamamen ücretsiz · Kayıt zorunlu değil</span>
-      <span data-l="en">Android 7.0+ · Completely free · No subscription</span>
-      <span data-l="es">Android 7.0+ · Gratis · Sin suscripción</span>
+      <span data-l="tr" class="active">Android 7.0+ · Tamamen ücretsiz · 18+</span>
+      <span data-l="en">Android 7.0+ · Completely free · 18+ only</span>
+      <span data-l="es">Android 7.0+ · Gratis · Solo +18</span>
     </p>
   </div>
 </section>
@@ -401,19 +433,19 @@
       </div>
     </div>
     <div class="stat-item">
-      <div class="stat-num gold">0₺</div>
+      <div class="stat-num gold">100%</div>
       <div class="stat-desc">
-        <span data-l="tr" class="active">Tamamen ücretsiz, her zaman</span>
-        <span data-l="en">Completely free, always</span>
-        <span data-l="es">Completamente gratis, siempre</span>
+        <span data-l="tr" class="active">Tamamen ücretsiz</span>
+        <span data-l="en">Completely free</span>
+        <span data-l="es">Totalmente gratis</span>
       </div>
     </div>
     <div class="stat-item">
-      <div class="stat-num green">⚡</div>
+      <div class="stat-num green">📧</div>
       <div class="stat-desc">
-        <span data-l="tr" class="active">Anlık bakiye yansıması</span>
-        <span data-l="en">Instant balance updates</span>
-        <span data-l="es">Saldo actualizado al instante</span>
+        <span data-l="tr" class="active">Hediye kartı kodun e-postana gelir</span>
+        <span data-l="en">Gift card codes sent to your email</span>
+        <span data-l="es">Códigos de tarjeta regalo a tu correo</span>
       </div>
     </div>
   </div>
@@ -440,7 +472,7 @@
     <div class="step fade-up">
       <div class="step-num">01</div>
       <div class="step-emoji">📲</div>
-      <h3><span data-l="tr" class="active">İndir & Kayıt Ol</span><span data-l="en">Download & Sign Up</span><span data-l="es">Descarga y Regístrate</span></h3>
+      <h3><span data-l="tr" class="active">İndir &amp; Kayıt Ol</span><span data-l="en">Download &amp; Sign Up</span><span data-l="es">Descarga y Regístrate</span></h3>
       <p><span data-l="tr" class="active">Google Play'den ücretsiz indir, e-posta ile saniyeler içinde hesap oluştur. Kredi kartı veya ücret yok.</span><span data-l="en">Download free from Google Play, create an account with your email in seconds. No credit card or fees.</span><span data-l="es">Descarga gratis desde Google Play, crea una cuenta con tu correo en segundos. Sin tarjeta ni cargos.</span></p>
     </div>
     <div class="step fade-up" style="transition-delay:.1s">
@@ -453,7 +485,7 @@
       <div class="step-num">03</div>
       <div class="step-emoji">🎁</div>
       <h3><span data-l="tr" class="active">Ödülünü Al</span><span data-l="en">Claim Your Reward</span><span data-l="es">Recibe Tu Premio</span></h3>
-      <p><span data-l="tr" class="active">Biriktirdiğin Phy ile Amazon, Steam, Google Play gibi platformlara hediye kartı al. Bakiye anında yansır.</span><span data-l="en">Use your Phy to get gift cards for Amazon, Steam, Google Play and more. Balance reflects instantly.</span><span data-l="es">Usa tu Phy para obtener tarjetas regalo de Amazon, Steam, Google Play y más. Saldo al instante.</span></p>
+      <p><span data-l="tr" class="active">Biriktirdiğin Phy'yi Mağaza'da dijital hediye kartlarına dönüştür. Talebini Siparişlerim ekranından takip et; kodun e-postana ve uygulamaya gönderilir.</span><span data-l="en">Turn your Phy into digital gift cards in the Store. Track your request on the My Orders screen; your code is sent to your email and shown in the app.</span><span data-l="es">Convierte tus Phy en tarjetas regalo digitales en la Tienda. Sigue tu solicitud en Mis Pedidos; el código se envía a tu correo y aparece en la app.</span></p>
     </div>
   </div>
 </div>
@@ -480,43 +512,56 @@
     <div class="earn-card fade-up" style="--accent:#9B6DFF">
       <div class="earn-icon-wrap" style="background:rgba(155,109,255,.12)">⏰</div>
       <h3><span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono por Hora</span></h3>
-      <p><span data-l="tr" class="active">Her saat ücretsiz Phy talep et. Günde 24 kez, hiç ücret ödemeden.</span><span data-l="en">Claim free Phy every hour, 24 times a day, completely free.</span><span data-l="es">Reclama Phy gratis cada hora, 24 veces al día, sin costo.</span></p>
+      <p>
+        <span data-l="tr" class="active">Her saat ücretsiz Phy talep et. Her seferinde +50 Phy, günde 24 kez, tamamen ücretsiz.</span>
+        <span data-l="en">Claim free Phy every hour. +50 Phy each time, 24 times a day, completely free.</span>
+        <span data-l="es">Reclama Phy gratis cada hora. +50 Phy cada vez, 24 veces al día, sin costo.</span>
+      </p>
       <span class="earn-tag tag-purple"><span data-l="tr" class="active">Her Saat</span><span data-l="en">Every Hour</span><span data-l="es">Cada Hora</span></span>
     </div>
 
     <div class="earn-card fade-up" style="--accent:#F5C842;transition-delay:.05s">
       <div class="earn-icon-wrap" style="background:rgba(245,200,66,.1)">📺</div>
       <h3><span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Mira Anuncios</span></h3>
-      <p><span data-l="tr" class="active">Kısa ödüllü reklamlar izle, her izlemede Phy kazan. Günlük 15 reklam hakkı.</span><span data-l="en">Watch short rewarded ads and earn Phy each time. Up to 15 ads per day.</span><span data-l="es">Mira anuncios cortos y gana Phy cada vez. Hasta 15 anuncios al día.</span></p>
+      <p>
+        <span data-l="tr" class="active">İsteğe bağlı kısa ödüllü reklamlar izle. Her izlemede +100 Phy, günde en fazla 15 hak. Reklam izlemek zorunlu değildir.</span>
+        <span data-l="en">Watch optional short rewarded ads. +100 Phy per view, up to 15 times a day. Watching ads is never required.</span>
+        <span data-l="es">Mira anuncios cortos y opcionales. +100 Phy por visualización, hasta 15 veces al día. Ver anuncios es voluntario.</span>
+      </p>
       <span class="earn-tag tag-gold"><span data-l="tr" class="active">15 Reklam / Gün</span><span data-l="en">15 Ads / Day</span><span data-l="es">15 Anuncios / Día</span></span>
     </div>
 
     <div class="earn-card fade-up" style="--accent:#22F5A0;transition-delay:.1s">
       <div class="earn-icon-wrap" style="background:rgba(34,245,160,.08)">🧠</div>
       <h3><span data-l="tr" class="active">Bilgi Yarışması</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span></h3>
-      <p><span data-l="tr" class="active">Matematik, spor, teknoloji, coğrafya ve daha fazla kategoride sorular çöz, Phy kazan.</span><span data-l="en">Solve questions in math, sports, technology, geography and more to earn Phy.</span><span data-l="es">Resuelve preguntas de matemáticas, deportes, tecnología, geografía y más.</span></p>
+      <p>
+        <span data-l="tr" class="active">Matematik, Genel Kültür, Spor, Teknoloji, Coğrafya, Sinema ve Kripto kategorilerinde sorular çöz. Her doğru cevap +15 Phy (günde en fazla 60).</span>
+        <span data-l="en">Answer questions in Math, General Knowledge, Sports, Technology, Geography, Cinema and Crypto. +15 Phy per correct answer (up to 60 per day).</span>
+        <span data-l="es">Responde preguntas de Matemáticas, Cultura General, Deportes, Tecnología, Geografía, Cine y Cripto. +15 Phy por respuesta correcta (hasta 60 al día).</span>
+      </p>
       <span class="earn-tag tag-green"><span data-l="tr" class="active">7 Kategori</span><span data-l="en">7 Categories</span><span data-l="es">7 Categorías</span></span>
     </div>
 
     <div class="earn-card fade-up" style="--accent:#F97316;transition-delay:.15s">
       <div class="earn-icon-wrap" style="background:rgba(249,115,22,.1)">🔥</div>
       <h3><span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha Diaria</span></h3>
-      <p><span data-l="tr" class="active">Her gün giriş yaparak seri oluştur. 7. gün Sürpriz Kutu: 500–3.000 Phy kazanabilirsin!</span><span data-l="en">Log in every day to build your streak. Day 7 Surprise Box: 500–3,000 Phy!</span><span data-l="es">Entra cada día para tu racha. ¡Día 7 Caja Sorpresa: 500–3.000 Phy!</span></p>
+      <p>
+        <span data-l="tr" class="active">Her gün giriş yaparak seri oluştur. 1–6. günler 50'den 400 Phy'ye yükseliyor; 7. gün Sürpriz Kutu: 500–3.000 Phy!</span>
+        <span data-l="en">Log in every day to build your streak. Days 1–6 earn from 50 to 400 Phy; Day 7 Surprise Box: 500–3,000 Phy!</span>
+        <span data-l="es">Entra cada día para tu racha. Los días 1–6 ganan de 50 a 400 Phy; el Día 7 Caja Sorpresa: 500–3.000 Phy!</span>
+      </p>
       <span class="earn-tag" style="background:rgba(249,115,22,.12);color:#F97316;border:1px solid rgba(249,115,22,.25)"><span data-l="tr" class="active">7. Gün Sürpriz</span><span data-l="en">Day 7 Surprise</span><span data-l="es">Día 7 Sorpresa</span></span>
     </div>
 
     <div class="earn-card fade-up" style="--accent:#38BDF8;transition-delay:.2s">
       <div class="earn-icon-wrap" style="background:rgba(56,189,248,.08)">👥</div>
       <h3><span data-l="tr" class="active">Arkadaşını Davet Et</span><span data-l="en">Refer Friends</span><span data-l="es">Invita Amigos</span></h3>
-      <p><span data-l="tr" class="active">Referans bağlantını paylaş, her kayıt için bonus Phy kazan. Maksimum 10 davet ödülü.</span><span data-l="en">Share your referral link, earn bonus Phy for every signup. Up to 10 referral rewards.</span><span data-l="es">Comparte tu enlace, gana Phy extra por cada registro. Hasta 10 recompensas.</span></p>
+      <p>
+        <span data-l="tr" class="active">Davet kodunla katılan her arkadaş için 5.000 Phy kazan. En fazla 10 arkadaş davet edilebilir.</span>
+        <span data-l="en">Earn 5,000 Phy for every friend who joins with your code. Up to 10 friends can be invited.</span>
+        <span data-l="es">Gana 5.000 Phy por cada amigo que se una con tu código. Se pueden invitar hasta 10 amigos.</span>
+      </p>
       <span class="earn-tag" style="background:rgba(56,189,248,.1);color:#38BDF8;border:1px solid rgba(56,189,248,.22)"><span data-l="tr" class="active">Max 10 Davet</span><span data-l="en">Up to 10 Referrals</span><span data-l="es">Hasta 10 Referidos</span></span>
-    </div>
-
-    <div class="earn-card fade-up" style="--accent:#A78BFA;transition-delay:.25s;opacity:.65">
-      <div class="earn-icon-wrap" style="background:rgba(167,139,250,.08)">🎯</div>
-      <h3><span data-l="tr" class="active">Teklif Duvarı</span><span data-l="en">Offer Wall</span><span data-l="es">Muro de Ofertas</span></h3>
-      <p><span data-l="tr" class="active">Oyun indir, görev tamamla, büyük ödüller kazan.</span><span data-l="en">Download games, complete tasks, earn big rewards.</span><span data-l="es">Descarga juegos, completa tareas, gana grandes premios.</span></p>
-      <span class="earn-tag tag-purple"><span data-l="tr" class="active">Yakında</span><span data-l="en">Coming Soon</span><span data-l="es">Próximamente</span></span>
     </div>
 
   </div>
@@ -543,6 +588,46 @@
       <span data-l="en">Get it on Google Play</span>
       <span data-l="es">Descargar en Google Play</span>
     </a>
+  </div>
+</div>
+
+<!-- BILMEN GEREKENLER -->
+<div class="section" id="disclaimer" style="padding-top:0">
+  <div class="section-label">
+    <span data-l="tr" class="active">Bilmen Gerekenler</span>
+    <span data-l="en">Good to Know</span>
+    <span data-l="es">Bueno Saber</span>
+  </div>
+  <h2 class="section-title" style="margin-bottom:36px">
+    <span data-l="tr" class="active">Önemli Bilgiler</span>
+    <span data-l="en">Important Information</span>
+    <span data-l="es">Información Importante</span>
+  </h2>
+  <div class="disclaimer-grid">
+    <div class="disclaimer-card fade-up">
+      <div class="disclaimer-icon">💎</div>
+      <p>
+        <span data-l="tr" class="active"><strong>Phy</strong>, uygulama içi sanal bir puandır; nakit değeri yoktur, devredilemez ve satılamaz.</span>
+        <span data-l="en"><strong>Phy</strong> is a virtual in-app point with no cash value. It cannot be transferred or sold.</span>
+        <span data-l="es"><strong>Phy</strong> es un punto virtual en la app sin valor en efectivo. No puede transferirse ni venderse.</span>
+      </p>
+    </div>
+    <div class="disclaimer-card fade-up" style="transition-delay:.08s">
+      <div class="disclaimer-icon">🔞</div>
+      <p>
+        <span data-l="tr" class="active">Phyward yalnızca <strong>18 yaş ve üzeri</strong> kullanıcılar içindir.</span>
+        <span data-l="en">Phyward is intended for users aged <strong>18 and over</strong> only.</span>
+        <span data-l="es">Phyward está destinado únicamente a usuarios de <strong>18 años o más</strong>.</span>
+      </p>
+    </div>
+    <div class="disclaimer-card fade-up" style="transition-delay:.16s">
+      <div class="disclaimer-icon">🎯</div>
+      <p>
+        <span data-l="tr" class="active">Uygulamada kumar veya şans oyunu yoktur. Güncel oranlar her zaman uygulamada ve <a href="/terms.html">Kullanım Şartları</a>'nda yer alır.</span>
+        <span data-l="en">There is no gambling or game of chance in the app. Current rates are always shown in the app and in the <a href="/terms.html">Terms of Service</a>.</span>
+        <span data-l="es">No hay juegos de azar en la app. Las tasas actuales siempre están disponibles en la app y en los <a href="/terms.html">Términos de Servicio</a>.</span>
+      </p>
+    </div>
   </div>
 </div>
 
