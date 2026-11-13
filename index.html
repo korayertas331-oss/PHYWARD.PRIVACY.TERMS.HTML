@@ -15,9 +15,14 @@
   <meta name="description" content="Phyward ile her saat ücretsiz Phy kazan. Reklam izle, trivia çöz, arkadaşlarını davet et. 18+"/>
   <meta property="og:title" content="Phyward"/>
   <meta property="og:description" content="Soru çöz, görevleri tamamla, Phy topla. Ücretsiz · 18+"/>
-  <meta property="og:image" content="https://phyward.com/img/feature.png"/>
+  <meta property="og:image" content="https://phyward.com/img/og.jpg"/>
+  <meta property="og:image:width" content="1024"/>
+  <meta property="og:image:height" content="500"/>
   <meta property="og:url" content="https://phyward.com"/>
   <link rel="icon" href="/logo.jpg"/>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Phyward ücretli mi?","acceptedAnswer":{"@type":"Answer","text":"Hayır, tamamen ücretsiz. Uygulama içi satın alma veya abonelik yoktur."}},{"@type":"Question","name":"Phy nedir, paraya çevrilebilir mi?","acceptedAnswer":{"@type":"Answer","text":"Phy, uygulama içi sanal bir puandır; nakit veya kripto para değildir, devredilemez ve satılamaz. Phy'ni yalnızca uygulamadaki Mağaza'da dijital hediye kartlarına dönüştürebilirsin."}},{"@type":"Question","name":"Nasıl Phy kazanırım?","acceptedAnswer":{"@type":"Answer","text":"Saatlik bonus (saatte bir 50 Phy), isteğe bağlı ödüllü reklamlar (her biri 100 Phy, günde en fazla 15), bilgi yarışması (her doğru cevap 15 Phy, günde en fazla 60), günlük giriş serisi (1-6. günler 50-400 Phy, 7. gün 500-3.000 Phy sürpriz) ve arkadaş daveti (arkadaş başına 5.000 Phy, en fazla 10)."}},{"@type":"Question","name":"Kaç Phy ile hediye kartı alabilirim?","acceptedAnswer":{"@type":"Answer","text":"30.000 Phy = 1 $, 55.000 = 2 $, 80.000 = 3 $, 105.000 = 4 $, 120.000 = 5 $, 300.000 = 10 $. Güncel fiyatlar her zaman uygulamadaki Mağaza ekranındadır."}},{"@type":"Question","name":"Hediye kartım ne zaman gelir?","acceptedAnswer":{"@type":"Answer","text":"Talepler güvenlik kontrolünden geçer; en geç 24 saat içinde teslim etmeyi hedefliyoruz. Kod, talep ederken girdiğin e-posta adresine gönderilir ve uygulamada da görünür. Stok yetersizliğinde Phy bakiyen iade edilir."}},{"@type":"Question","name":"Reklam izlemek zorunlu mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Ödüllü reklamlar tamamen isteğe bağlıdır."}},{"@type":"Question","name":"Neden 18 yaş sınırı var?","acceptedAnswer":{"@type":"Answer","text":"Phy gerçek değeri olan dijital hediye kartlarına dönüştürülebildiği için uygulama yalnızca 18 yaş ve üzeri kullanıcılar içindir."}},{"@type":"Question","name":"Birden fazla hesap açabilir miyim?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Her cihazdan yalnızca bir hesap açılabilir. Bot, VPN/proxy, emülatör kullanmak veya birden fazla hesap açmak yasaktır ve hesabın kapatılmasına neden olur."}},{"@type":"Question","name":"Hesabımı nasıl silerim?","acceptedAnswer":{"@type":"Answer","text":"Uygulamada Profil → 'Hesabı Kalıcı Olarak Sil' seçeneğini kullan; ya da phyward.com/delete-account sayfasını ziyaret et ya da support@phyward.com adresine yaz."}},{"@type":"Question","name":"Destek ekibine nasıl ulaşırım?","acceptedAnswer":{"@type":"Answer","text":"support@phyward.com adresine e-posta göndererek ulaşabilirsin."}}]}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
   <noscript><style>
@@ -196,17 +201,14 @@
       overflow:hidden;
       animation:phone-float 5s ease-in-out infinite;
     }
-    .phone-notch{
-      position:absolute;top:10px;left:50%;transform:translateX(-50%);
-      width:72px;height:22px;background:#050208;border-radius:14px;
-      z-index:10;
-    }
-    .phone-screen{position:relative;padding-top:0}
+    .phone-notch{display:none}
+    .phone-screen{position:relative;padding-top:0;aspect-ratio:9/16;overflow:hidden}
     .phone-screen img{
-      width:100%;height:auto;display:block;
+      width:100%;height:100%;display:block;
+      object-fit:cover;object-position:top center;
       transition:opacity .45s ease;
     }
-    .phone-screen img.hidden{opacity:0;position:absolute;top:0;left:0;width:100%;height:auto}
+    .phone-screen img.hidden{opacity:0;position:absolute;top:0;left:0;width:100%;height:100%}
     .phone-dots{display:flex;gap:6px;justify-content:center}
     .phone-dot{
       width:6px;height:6px;border-radius:50%;
@@ -357,7 +359,7 @@
     .card-davet .bento-tag{margin-top:10px}
 
     /* ── Disclaimer ────────────────────────────────── */
-    .disclaimer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .disclaimer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
     .disc-card{
       background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);
       border-radius:20px;padding:24px;
@@ -467,9 +469,9 @@
       border-radius:44px;border:7px solid rgba(255,255,255,.12);
       box-shadow:0 0 0 1px rgba(255,255,255,.06),0 40px 80px rgba(0,0,0,.55),0 0 70px rgba(139,92,246,.18),inset 0 0 0 1px rgba(255,255,255,.04);
       background:#050208;overflow:hidden;position:relative;
+      aspect-ratio:9/16;
     }
-    .earn-sticky-phone .phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:68px;height:20px;background:#050208;border-radius:12px;z-index:5}
-    .earn-sticky-phone img{width:100%;height:auto;display:block;transition:opacity .4s}
+    .earn-sticky-phone img{width:100%;height:100%;display:block;object-fit:cover;object-position:top center;transition:opacity .4s}
     .earn-feature-card{
       background:var(--glass);border:1px solid var(--glass-border);
       backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -572,6 +574,43 @@
     }
     @media(max-width:900px){#mobile-dl-bar{display:block}body{padding-bottom:80px}}
 
+    /* ── Streak label on/off ───────────────────────── */
+    .sl-off{display:none}
+    .streak-label.is-off .sl-on{display:none}
+    .streak-label.is-off .sl-off{display:inline}
+
+    /* ── FAQ accordion ─────────────────────────────── */
+    .faq-list{display:flex;flex-direction:column;gap:10px}
+    .faq-item{
+      background:var(--glass);border:1px solid var(--glass-border);
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      border-radius:18px;overflow:hidden;
+      transition:border-color .22s;
+    }
+    .faq-item[open]{border-color:var(--purple-border)}
+    .faq-q{
+      padding:20px 24px;font-size:15px;font-weight:700;cursor:pointer;
+      list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+      user-select:none;-webkit-user-select:none;
+      transition:color .18s;
+    }
+    .faq-q::-webkit-details-marker{display:none}
+    .faq-q::after{
+      content:'+';font-size:20px;line-height:1;color:var(--purple);
+      flex-shrink:0;transition:transform .22s;
+    }
+    .faq-item[open] .faq-q::after{transform:rotate(45deg)}
+    .faq-item[open] .faq-q{color:var(--purple)}
+    .faq-a{
+      padding:0 24px 20px;font-size:14px;color:var(--muted);line-height:1.7;
+    }
+    .faq-a a{color:var(--purple);text-decoration:none}
+    .faq-a a:hover{text-decoration:underline}
+    @media(prefers-reduced-motion:no-preference){
+      .faq-item[open] .faq-a{animation:faq-open .2s ease}
+      @keyframes faq-open{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+    }
+
     /* ── Reduced motion ────────────────────────────── */
     @media(prefers-reduced-motion:reduce){
       .aurora-blob,.phone-frame,.fade-up,.fade-in{animation:none!important;transition:none!important}
@@ -602,6 +641,9 @@
     <a href="#download" data-l="tr" class="active">İndir</a>
     <a href="#download" data-l="en">Download</a>
     <a href="#download" data-l="es">Descargar</a>
+    <a href="#faq" data-l="tr" class="active">SSS</a>
+    <a href="#faq" data-l="en">FAQ</a>
+    <a href="#faq" data-l="es">Preguntas</a>
   </div>
   <div class="nav-right">
     <div class="lang-btns">
@@ -925,10 +967,9 @@
           <input type="checkbox" id="c-streak" checked/>
           <div class="toggle-track"><div class="toggle-thumb"></div></div>
         </div>
-        <span class="streak-label">
-          <span data-l="tr" class="active"><strong>Günlük Seri</strong> aktif — ort. <strong>+421 Phy/gün</strong></span>
-          <span data-l="en"><strong>Daily Streak</strong> active — avg <strong>+421 Phy/day</strong></span>
-          <span data-l="es"><strong>Racha Diaria</strong> activa — prom. <strong>+421 Phy/día</strong></span>
+        <span class="streak-label" id="streak-label-wrap">
+          <span class="sl-on"><span data-l="tr" class="active"><strong>Günlük Seri</strong> aktif — ort. <strong>+421 Phy/gün</strong></span><span data-l="en">Daily streak on — avg. <strong>+421 Phy/day</strong></span><span data-l="es">Racha diaria activa — prom. <strong>+421 Phy/día</strong></span></span>
+          <span class="sl-off"><span data-l="tr" class="active">Günlük Seri kapalı</span><span data-l="en">Daily streak off</span><span data-l="es">Racha diaria desactivada</span></span>
         </span>
       </label>
     </div>
@@ -944,7 +985,7 @@
       </div>
       <div class="calc-out">
         <span class="out-val" id="out-days">19</span>
-        <span class="out-label"><span data-l="tr" class="active">Gün → 1$ Kartı</span><span data-l="en">Days → $1 Card</span><span data-l="es">Días → Tarj. $1</span></span>
+        <span class="out-label"><span data-l="tr" class="active">Gün → 1 $ Kartı</span><span data-l="en">Days → $1 Card</span><span data-l="es">Días → Tarj. 1 $</span></span>
       </div>
       <div class="calc-out out-tier-box">
         <span class="out-val" id="out-tier">$1</span>
@@ -1021,6 +1062,169 @@
         <span data-l="es">No hay juegos de azar en la app. Las tasas actuales siempre están disponibles en la app y en los <a href="/terms.html">Términos de Servicio</a>.</span>
       </p>
     </div>
+    <div class="disc-card fade-up" style="transition-delay:.24s">
+      <div class="disc-icon">🎯</div>
+      <p>
+        <span data-l="tr" class="active">Her görevin ödülü sen başlamadan önce gösterilir; sürpriz kesinti yoktur.</span>
+        <span data-l="en">Every task shows its reward before you start — no hidden deductions.</span>
+        <span data-l="es">Cada tarea muestra su recompensa antes de empezar — sin descuentos ocultos.</span>
+      </p>
+    </div>
+    <div class="disc-card fade-up" style="transition-delay:.32s">
+      <div class="disc-icon">⏱️</div>
+      <p>
+        <span data-l="tr" class="active">Hediye kartı talepleri güvenlik kontrolünden geçer. Talepleri en geç 24 saat içinde teslim etmeyi hedefliyoruz; ek kontrol gerektiğinde bu süre uzayabilir. Durumunu Siparişlerim ekranından takip edebilirsin.</span>
+        <span data-l="en">Gift card requests go through a security check. We aim to deliver within 24 hours; it may take longer if extra checks are needed. Track the status on the My Orders screen.</span>
+        <span data-l="es">Las solicitudes de tarjetas regalo pasan por un control de seguridad. Intentamos entregarlas en un máximo de 24 horas; puede tardar más si se necesitan controles adicionales. Sigue el estado en Mis Pedidos.</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SSS / FAQ -->
+<div class="section" id="faq" style="padding-top:0">
+  <div class="section-label">
+    <span data-l="tr" class="active">Sık Sorulan Sorular</span>
+    <span data-l="en">Frequently Asked Questions</span>
+    <span data-l="es">Preguntas Frecuentes</span>
+  </div>
+  <h2 class="section-title" style="margin-bottom:36px">
+    <span data-l="tr" class="active">SSS</span>
+    <span data-l="en">FAQ</span>
+    <span data-l="es">Preguntas</span>
+  </h2>
+  <div class="faq-list">
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Phyward ücretli mi?</span>
+        <span data-l="en">Is Phyward free?</span>
+        <span data-l="es">¿Phyward es de pago?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Hayır, tamamen ücretsiz. Uygulama içi satın alma veya abonelik yoktur.</span>
+        <span data-l="en">No, it's completely free. There are no in-app purchases or subscriptions.</span>
+        <span data-l="es">No, es completamente gratuito. No hay compras dentro de la app ni suscripciones.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Phy nedir, paraya çevrilebilir mi?</span>
+        <span data-l="en">What is Phy? Can it be converted to cash?</span>
+        <span data-l="es">¿Qué es Phy? ¿Se puede convertir en dinero?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Phy, uygulama içi sanal bir puandır; nakit veya kripto para değildir, devredilemez ve satılamaz. Phy'ni yalnızca uygulamadaki Mağaza'da dijital hediye kartlarına dönüştürebilirsin.</span>
+        <span data-l="en">Phy is a virtual in-app point. It is not cash or cryptocurrency, and it cannot be transferred or sold. You can only convert Phy into digital gift cards in the Store within the app.</span>
+        <span data-l="es">Phy es un punto virtual dentro de la app. No es dinero en efectivo ni criptomoneda, y no puede transferirse ni venderse. Solo puedes convertir Phy en tarjetas regalo digitales en la Tienda de la app.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Nasıl Phy kazanırım?</span>
+        <span data-l="en">How do I earn Phy?</span>
+        <span data-l="es">¿Cómo gano Phy?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Saatlik bonus (saatte bir 50 Phy), isteğe bağlı ödüllü reklamlar (her biri 100 Phy, günde en fazla 15), bilgi yarışması (her doğru cevap 15 Phy, günde en fazla 60), günlük giriş serisi (1–6. günler 50→400 Phy, 7. gün 500–3.000 Phy sürpriz) ve arkadaş daveti (arkadaş başına 5.000 Phy, en fazla 10).</span>
+        <span data-l="en">Hourly bonus (50 Phy per hour), optional rewarded ads (100 Phy each, up to 15/day), trivia quiz (15 Phy per correct answer, up to 60/day), daily login streak (days 1–6 earn 50→400 Phy, day 7 is a 500–3,000 Phy surprise), and friend referrals (5,000 Phy per friend, up to 10).</span>
+        <span data-l="es">Bono horario (50 Phy por hora), anuncios con recompensa opcionales (100 Phy cada uno, hasta 15/día), preguntas de trivia (15 Phy por respuesta correcta, hasta 60/día), racha diaria (días 1–6 ganan 50→400 Phy, día 7 sorpresa de 500–3.000 Phy) y referidos (5.000 Phy por amigo, hasta 10).</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Kaç Phy ile hediye kartı alabilirim?</span>
+        <span data-l="en">How many Phy do I need for a gift card?</span>
+        <span data-l="es">¿Cuántos Phy necesito para obtener una tarjeta regalo?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">30.000 Phy = 1 $, 55.000 = 2 $, 80.000 = 3 $, 105.000 = 4 $, 120.000 = 5 $, 300.000 = 10 $. Güncel fiyatlar her zaman uygulamadaki Mağaza ekranındadır.</span>
+        <span data-l="en">30,000 Phy = $1, 55,000 = $2, 80,000 = $3, 105,000 = $4, 120,000 = $5, 300,000 = $10. Current prices are always available in the Store screen in the app.</span>
+        <span data-l="es">30.000 Phy = 1 $, 55.000 = 2 $, 80.000 = 3 $, 105.000 = 4 $, 120.000 = 5 $, 300.000 = 10 $. Los precios actuales siempre están en la pantalla de la Tienda en la app.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Hediye kartım ne zaman gelir?</span>
+        <span data-l="en">When will my gift card arrive?</span>
+        <span data-l="es">¿Cuándo llegará mi tarjeta regalo?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Talepler güvenlik kontrolünden geçer; en geç 24 saat içinde teslim etmeyi hedefliyoruz. Kod, talep ederken girdiğin e-posta adresine gönderilir ve uygulamada da görünür. Stok yetersizliğinde Phy bakiyen iade edilir.</span>
+        <span data-l="en">Requests go through a security check; we aim to deliver within 24 hours. The code is sent to the email address you provided and also appears in the app. If a card is out of stock, your Phy balance will be refunded.</span>
+        <span data-l="es">Las solicitudes pasan por un control de seguridad; intentamos entregar en un máximo de 24 horas. El código se envía al correo proporcionado y también aparece en la app. Si una tarjeta está agotada, se reembolsa el saldo de Phy.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Reklam izlemek zorunlu mu?</span>
+        <span data-l="en">Is watching ads required?</span>
+        <span data-l="es">¿Es obligatorio ver anuncios?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Hayır. Ödüllü reklamlar tamamen isteğe bağlıdır; izlemeyenler yine de diğer tüm kazanma yollarından yararlanabilir.</span>
+        <span data-l="en">No. Rewarded ads are entirely optional; users who skip them can still use all other earning methods.</span>
+        <span data-l="es">No. Los anuncios con recompensa son completamente opcionales; los usuarios que los omitan pueden usar todos los demás métodos de ganancia.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Neden 18 yaş sınırı var?</span>
+        <span data-l="en">Why is there an age restriction of 18+?</span>
+        <span data-l="es">¿Por qué hay una restricción de edad de 18 años?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Phy gerçek değeri olan dijital hediye kartlarına dönüştürülebildiği için uygulama yalnızca 18 yaş ve üzeri kullanıcılar içindir.</span>
+        <span data-l="en">Because Phy can be converted into digital gift cards with real value, the app is restricted to users aged 18 and over.</span>
+        <span data-l="es">Debido a que Phy puede convertirse en tarjetas regalo digitales con valor real, la app está restringida a usuarios de 18 años o más.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Birden fazla hesap açabilir miyim?</span>
+        <span data-l="en">Can I create more than one account?</span>
+        <span data-l="es">¿Puedo crear más de una cuenta?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Hayır. Her cihazdan yalnızca bir hesap açılabilir. Bot, VPN/proxy, emülatör kullanmak veya birden fazla hesap açmak yasaktır ve hesabın kapatılmasına neden olur.</span>
+        <span data-l="en">No. Only one account is allowed per device. Using bots, VPN/proxy, emulators, or creating multiple accounts is prohibited and will result in account suspension.</span>
+        <span data-l="es">No. Solo se permite una cuenta por dispositivo. El uso de bots, VPN/proxy, emuladores o la creación de múltiples cuentas está prohibido y resultará en la suspensión de la cuenta.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Hesabımı nasıl silerim?</span>
+        <span data-l="en">How do I delete my account?</span>
+        <span data-l="es">¿Cómo elimino mi cuenta?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active">Uygulamada Profil → "Hesabı Kalıcı Olarak Sil" seçeneğini kullan; ya da <a href="/delete-account.html">phyward.com/delete-account</a> sayfasını ziyaret et ya da <a href="mailto:support@phyward.com">support@phyward.com</a> adresine yaz.</span>
+        <span data-l="en">In the app, go to Profile → "Permanently Delete Account"; or visit <a href="/delete-account.html">phyward.com/delete-account</a>; or email <a href="mailto:support@phyward.com">support@phyward.com</a>.</span>
+        <span data-l="es">En la app, ve a Perfil → "Eliminar cuenta permanentemente"; o visita <a href="/delete-account.html">phyward.com/delete-account</a>; o escribe a <a href="mailto:support@phyward.com">support@phyward.com</a>.</span>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">
+        <span data-l="tr" class="active">Destek ekibine nasıl ulaşırım?</span>
+        <span data-l="en">How do I contact support?</span>
+        <span data-l="es">¿Cómo contacto al equipo de soporte?</span>
+      </summary>
+      <div class="faq-a">
+        <span data-l="tr" class="active"><a href="mailto:support@phyward.com">support@phyward.com</a> adresine e-posta göndererek ulaşabilirsin.</span>
+        <span data-l="en">Send an email to <a href="mailto:support@phyward.com">support@phyward.com</a>.</span>
+        <span data-l="es">Envía un correo electrónico a <a href="mailto:support@phyward.com">support@phyward.com</a>.</span>
+      </div>
+    </details>
+
   </div>
 </div>
 
@@ -1035,6 +1239,7 @@
       <a href="/privacy.html"><span data-l="tr" class="active">Gizlilik</span><span data-l="en">Privacy</span><span data-l="es">Privacidad</span></a>
       <a href="/terms.html"><span data-l="tr" class="active">Kullanım Şartları</span><span data-l="en">Terms</span><span data-l="es">Términos</span></a>
       <a href="/delete-account.html"><span data-l="tr" class="active">Hesap Sil</span><span data-l="en">Delete Account</span><span data-l="es">Eliminar Cuenta</span></a>
+      <a href="#faq"><span data-l="tr" class="active">SSS</span><span data-l="en">FAQ</span><span data-l="es">Preguntas</span></a>
       <a href="mailto:support@phyward.com">support@phyward.com</a>
     </div>
     <div class="footer-copy">© 2026 Phyward</div>
@@ -1063,6 +1268,7 @@
     if (btn) btn.classList.add('active');
     updatePhoneImg();
     updateEarnPhone();
+    calcUpdate();
   }
 
   /* ── Nav shrink ────────────────────────────────── */
@@ -1154,6 +1360,10 @@
     })(t0);
   }
 
+  function fmtTier(usd) {
+    return currentLang === 'en' ? '$' + usd : usd + ' $';
+  }
+
   function calcUpdate() {
     const hourly = +document.getElementById('c-hourly').value;
     const ads    = +document.getElementById('c-ads').value;
@@ -1165,13 +1375,16 @@
     const daily   = hourly * 50 + ads * 100 + trivia * 15 + (streak ? 421 : 0);
     const monthly = daily * 30;
     const daysTo1 = daily > 0 ? Math.ceil(30000 / daily) : '∞';
-    const tiers   = [[300000,'$10'],[120000,'$5'],[105000,'$4'],[80000,'$3'],[55000,'$2'],[30000,'$1']];
+    const TIERS   = [[300000,10],[120000,5],[105000,4],[80000,3],[55000,2],[30000,1]];
     let best = '-';
-    for (const [t, lbl] of tiers) { if (monthly >= t) { best = lbl; break; } }
+    for (const [t, usd] of TIERS) { if (monthly >= t) { best = fmtTier(usd); break; } }
     animateNum('out-daily', daily);
     animateNum('out-monthly', monthly);
     document.getElementById('out-days').textContent = daysTo1 === '∞' ? '∞' : daysTo1;
     document.getElementById('out-tier').textContent = best;
+    // Streak label on/off
+    const wrap = document.getElementById('streak-label-wrap');
+    if (wrap) wrap.classList.toggle('is-off', !streak);
   }
 
   ['c-hourly','c-ads','c-trivia','c-streak'].forEach(id => {
