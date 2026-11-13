@@ -14,12 +14,12 @@
   <title>Phyward — Zamanını Ödüle Dönüştür</title>
   <meta name="description" content="Phyward ile her saat ücretsiz Phy kazan. Reklam izle, trivia çöz, arkadaşlarını davet et. 18+"/>
   <meta property="og:title" content="Phyward"/>
-  <meta property="og:description" content="Zamanını ödüle dönüştür. Ücretsiz, anlık, güvenli."/>
+  <meta property="og:description" content="Soru çöz, görevleri tamamla, Phy topla. Ücretsiz · 18+"/>
   <meta property="og:image" content="https://phyward.com/img/feature.png"/>
   <meta property="og:url" content="https://phyward.com"/>
   <link rel="icon" href="/logo.jpg"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
   <noscript><style>
     .fade-up,.fade-in{opacity:1!important;transform:none!important}
     [data-l="tr"]{display:inline!important}[data-l="en"],[data-l="es"]{display:none!important}
@@ -450,6 +450,128 @@
       .hero h1{letter-spacing:-1px}
     }
 
+    /* ── Space Grotesk headings ───────────────────── */
+    h1,h2,h3,.stat-num,.calc-title{font-family:'Space Grotesk','Inter',system-ui,sans-serif}
+
+    /* ── QR card (hero, desktop) ───────────────────── */
+    .hero-qr{display:none;flex-direction:column;align-items:flex-start;gap:8px;margin-top:24px}
+    .qr-frame{background:#fff;border-radius:14px;padding:10px;width:108px;height:108px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(139,92,246,.2)}
+    .qr-frame img{width:88px;height:88px;display:block}
+    .qr-caption{font-size:11px;color:var(--muted);line-height:1.6;max-width:108px}
+    @media(min-width:900px){.hero-qr{display:flex}}
+
+    /* ── Earn sticky layout ────────────────────────── */
+    .earn-scroll-wrap{display:grid;grid-template-columns:1fr 268px;gap:52px;align-items:start}
+    .earn-sticky-side{position:sticky;top:88px}
+    .earn-sticky-phone{
+      border-radius:44px;border:7px solid rgba(255,255,255,.12);
+      box-shadow:0 0 0 1px rgba(255,255,255,.06),0 40px 80px rgba(0,0,0,.55),0 0 70px rgba(139,92,246,.18),inset 0 0 0 1px rgba(255,255,255,.04);
+      background:#050208;overflow:hidden;position:relative;
+    }
+    .earn-sticky-phone .phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:68px;height:20px;background:#050208;border-radius:12px;z-index:5}
+    .earn-sticky-phone img{width:100%;height:auto;display:block;transition:opacity .4s}
+    .earn-feature-card{
+      background:var(--glass);border:1px solid var(--glass-border);
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      border-radius:24px;padding:28px 24px;margin-bottom:20px;
+      position:relative;overflow:hidden;
+      transition:border-color .25s,box-shadow .25s;
+    }
+    .earn-feature-card:last-child{margin-bottom:0}
+    .earn-feature-card::after{
+      content:'';position:absolute;inset:0;border-radius:inherit;
+      background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.09),transparent 60%);
+      opacity:0;transition:opacity .3s;pointer-events:none;
+    }
+    .earn-feature-card:hover::after{opacity:1}
+    .earn-feature-card.is-active{border-color:var(--purple-border);box-shadow:0 0 36px rgba(139,92,246,.14)}
+    .earn-feature-card .accent-line{position:absolute;top:0;left:0;right:0;height:2px;border-radius:24px 24px 0 0;background:var(--accent,linear-gradient(90deg,var(--purple),var(--pink)));opacity:0;transition:opacity .25s}
+    .earn-feature-card:hover .accent-line,.earn-feature-card.is-active .accent-line{opacity:1}
+    .earn-feat-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;border:1px solid var(--glass-border);background:rgba(255,255,255,.04)}
+    .earn-feature-card h3{font-size:16px;font-weight:800;margin-bottom:8px}
+    .earn-feature-card p{font-size:13px;color:var(--muted);line-height:1.6}
+    .earn-feat-mobile-img{display:none;margin-top:16px;border-radius:16px;overflow:hidden;max-width:180px;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+    .earn-feat-mobile-img img{width:100%;height:auto;display:block}
+    @media(max-width:900px){
+      .earn-scroll-wrap{grid-template-columns:1fr}
+      .earn-sticky-side{display:none}
+      .earn-feat-mobile-img{display:block}
+    }
+
+    /* ── Earnings calculator ───────────────────────── */
+    .calc-section{max-width:1080px;margin:0 auto;padding:0 24px 88px}
+    .calc-box{
+      background:var(--glass);border:1px solid var(--glass-border);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border-radius:28px;padding:48px;position:relative;overflow:hidden;
+    }
+    .calc-label-row{margin-bottom:28px}
+    .calc-title{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-.5px;line-height:1.1;margin-bottom:8px}
+    .calc-subtitle{font-size:14px;color:var(--muted)}
+    .calc-controls{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+    .calc-field label{display:block;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .calc-field .slider-row{display:flex;align-items:center;gap:12px}
+    .calc-field input[type=range]{
+      -webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:4px;
+      background:var(--purple-dim);cursor:pointer;outline:none;
+    }
+    .calc-field input[type=range]::-webkit-slider-thumb{
+      -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;
+      background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 0 10px rgba(139,92,246,.4);
+    }
+    .calc-field input[type=range]::-moz-range-thumb{
+      width:18px;height:18px;border-radius:50%;border:none;
+      background:linear-gradient(135deg,var(--purple),var(--pink));
+    }
+    .slider-val{min-width:40px;text-align:right;font-size:16px;font-weight:800;color:var(--text);font-family:'Space Grotesk',sans-serif}
+    .calc-streak-row{
+      grid-column:span 2;display:flex;align-items:center;gap:14px;
+      background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.18);
+      border-radius:16px;padding:16px 20px;cursor:pointer;
+    }
+    .toggle-wrap{position:relative;width:46px;height:26px;flex-shrink:0}
+    .toggle-wrap input{opacity:0;width:0;height:0;position:absolute}
+    .toggle-track{position:absolute;inset:0;border-radius:13px;background:rgba(255,255,255,.14);transition:background .2s}
+    .toggle-wrap input:checked ~ .toggle-track{background:linear-gradient(135deg,#F97316,var(--pink))}
+    .toggle-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+    .toggle-wrap input:checked ~ .toggle-track .toggle-thumb{transform:translateX(20px)}
+    .streak-label{flex:1;font-size:13px;color:var(--text);line-height:1.5}
+    .streak-label strong{color:#F97316}
+    .calc-outputs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .calc-out{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:20px;text-align:center}
+    .out-val{
+      font-size:clamp(20px,2.4vw,28px);font-weight:900;letter-spacing:-1px;
+      font-family:'Space Grotesk',sans-serif;display:block;margin-bottom:4px;
+      background:linear-gradient(135deg,var(--purple),var(--pink));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .calc-out.out-tier-box .out-val{font-size:clamp(18px,2vw,24px)}
+    .out-label{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+    .calc-disclaimer{margin-top:20px;font-size:11px;color:var(--muted2);border-top:1px solid rgba(255,255,255,.06);padding-top:14px;line-height:1.65}
+    @media(max-width:768px){
+      .calc-controls{grid-template-columns:1fr}
+      .calc-streak-row{grid-column:span 1}
+      .calc-outputs{grid-template-columns:repeat(2,1fr)}
+      .calc-box{padding:28px 20px}
+    }
+
+    /* ── Mobile download bar ───────────────────────── */
+    #mobile-dl-bar{
+      display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;
+      padding:12px 20px;padding-bottom:calc(12px + env(safe-area-inset-bottom));
+      background:rgba(8,4,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      border-top:1px solid rgba(255,255,255,.08);
+      transform:translateY(0);transition:transform .3s ease;
+    }
+    #mobile-dl-bar.bar-hidden{transform:translateY(calc(100% + 2px))}
+    #mobile-dl-bar a{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      background:linear-gradient(135deg,var(--purple),var(--pink));
+      color:#fff;text-decoration:none;padding:14px;border-radius:14px;
+      font-size:15px;font-weight:700;box-shadow:0 4px 20px rgba(139,92,246,.4);
+    }
+    @media(max-width:900px){#mobile-dl-bar{display:block}body{padding-bottom:80px}}
+
     /* ── Reduced motion ────────────────────────────── */
     @media(prefers-reduced-motion:reduce){
       .aurora-blob,.phone-frame,.fade-up,.fade-in{animation:none!important;transition:none!important}
@@ -556,6 +678,14 @@
         <span data-l="en">Android 7.0+ · Completely free · 18+ only</span>
         <span data-l="es">Android 7.0+ · Gratis · Solo +18</span>
       </p>
+      <div class="hero-qr">
+        <div class="qr-frame"><img src="/img/play-qr.svg" alt="Google Play QR kodu" width="88" height="88"/></div>
+        <p class="qr-caption">
+          <span data-l="tr" class="active">Telefonunla okut</span>
+          <span data-l="en">Scan with your phone</span>
+          <span data-l="es">Escanea con tu teléfono</span>
+        </p>
+      </div>
     </div>
 
     <!-- Phone mockup -->
@@ -563,7 +693,7 @@
       <div class="phone-frame" role="img" aria-label="Phyward app screenshots">
         <div class="phone-notch" aria-hidden="true"></div>
         <div class="phone-screen">
-          <img id="phone-img" src="/img/tr-1.png" alt="Phyward uygulaması ekran görüntüsü" loading="eager"/>
+          <img id="phone-img" src="/img/tr-1.webp" alt="Phyward uygulaması ekran görüntüsü" loading="eager"/>
         </div>
       </div>
       <div class="phone-dots" role="tablist" aria-label="Ekranlar">
@@ -670,50 +800,163 @@
     <span data-l="en">Multiple earning methods — stack more Phy every single day.</span>
     <span data-l="es">Múltiples métodos de ganancia — acumula más Phy cada día.</span>
   </p>
-  <div class="earn-bento">
+  <div class="earn-scroll-wrap">
+    <!-- Left: feature cards -->
+    <div class="earn-feature-list">
 
-    <div class="bento-card card-saatlik fade-up" style="--accent:linear-gradient(90deg,var(--purple),#6366F1)">
-      <div class="accent-line"></div>
-      <div class="bento-icon" style="background:rgba(139,92,246,.12)">⏰</div>
-      <h3><span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono por Hora</span></h3>
-      <p><span data-l="tr" class="active">Her saat ücretsiz Phy talep et. Her seferinde +50 Phy, günde 24 kez, tamamen ücretsiz.</span><span data-l="en">Claim free Phy every hour. +50 Phy each time, 24 times a day, completely free.</span><span data-l="es">Reclama Phy gratis cada hora. +50 Phy cada vez, 24 veces al día, sin costo.</span></p>
-      <span class="bento-tag tag-purple"><span data-l="tr" class="active">Her Saat</span><span data-l="en">Every Hour</span><span data-l="es">Cada Hora</span></span>
-    </div>
+      <div class="earn-feature-card is-active fade-up" data-screen="3" style="--accent:linear-gradient(90deg,var(--purple),#6366F1)">
+        <div class="accent-line"></div>
+        <div class="earn-feat-icon" style="background:rgba(139,92,246,.12)">⏰</div>
+        <h3><span data-l="tr" class="active">Saatlik Bonus</span><span data-l="en">Hourly Bonus</span><span data-l="es">Bono por Hora</span></h3>
+        <p><span data-l="tr" class="active">Her saat ücretsiz Phy talep et. Her seferinde +50 Phy, günde 24 kez, tamamen ücretsiz.</span><span data-l="en">Claim free Phy every hour. +50 Phy each time, 24 times a day, completely free.</span><span data-l="es">Reclama Phy gratis cada hora. +50 Phy cada vez, 24 veces al día, sin costo.</span></p>
+        <span class="bento-tag tag-purple"><span data-l="tr" class="active">Her Saat</span><span data-l="en">Every Hour</span><span data-l="es">Cada Hora</span></span>
+        <div class="earn-feat-mobile-img"><img src="/img/tr-3.webp" alt="" loading="lazy"/></div>
+      </div>
 
-    <div class="bento-card fade-up" style="--accent:linear-gradient(90deg,var(--gold),#F97316);transition-delay:.06s">
-      <div class="accent-line"></div>
-      <div class="bento-icon" style="background:rgba(245,200,66,.1)">📺</div>
-      <h3><span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Mira Anuncios</span></h3>
-      <p><span data-l="tr" class="active">İsteğe bağlı kısa ödüllü reklamlar izle. Her izlemede +100 Phy, günde en fazla 15 hak. Reklam izlemek zorunlu değildir.</span><span data-l="en">Watch optional short rewarded ads. +100 Phy per view, up to 15 times a day. Watching ads is never required.</span><span data-l="es">Mira anuncios cortos y opcionales. +100 Phy por visualización, hasta 15 veces al día. Ver anuncios es voluntario.</span></p>
-      <span class="bento-tag tag-gold"><span data-l="tr" class="active">15 Reklam / Gün</span><span data-l="en">15 Ads / Day</span><span data-l="es">15 Anuncios / Día</span></span>
-    </div>
+      <div class="earn-feature-card fade-up" data-screen="2" style="--accent:linear-gradient(90deg,var(--gold),#F97316);transition-delay:.06s">
+        <div class="accent-line"></div>
+        <div class="earn-feat-icon" style="background:rgba(245,200,66,.1)">📺</div>
+        <h3><span data-l="tr" class="active">Reklam İzle</span><span data-l="en">Watch Ads</span><span data-l="es">Mira Anuncios</span></h3>
+        <p><span data-l="tr" class="active">İsteğe bağlı kısa ödüllü reklamlar izle. Her izlemede +100 Phy, günde en fazla 15 hak. Reklam izlemek zorunlu değildir.</span><span data-l="en">Watch optional short rewarded ads. +100 Phy per view, up to 15 times a day. Watching ads is never required.</span><span data-l="es">Mira anuncios cortos y opcionales. +100 Phy por visualización, hasta 15 veces al día. Ver anuncios es voluntario.</span></p>
+        <span class="bento-tag tag-gold"><span data-l="tr" class="active">15 Reklam / Gün</span><span data-l="en">15 Ads / Day</span><span data-l="es">15 Anuncios / Día</span></span>
+        <div class="earn-feat-mobile-img"><img src="/img/tr-2.webp" alt="" loading="lazy"/></div>
+      </div>
 
-    <div class="bento-card fade-up" style="--accent:linear-gradient(90deg,var(--green),#06B6D4);transition-delay:.12s">
-      <div class="accent-line"></div>
-      <div class="bento-icon" style="background:rgba(34,245,160,.08)">🧠</div>
-      <h3><span data-l="tr" class="active">Bilgi Yarışması</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span></h3>
-      <p><span data-l="tr" class="active">Matematik, Genel Kültür, Spor, Teknoloji, Coğrafya, Sinema ve Kripto kategorilerinde sorular çöz. Her doğru cevap +15 Phy (günde en fazla 60).</span><span data-l="en">Answer questions in Math, General Knowledge, Sports, Technology, Geography, Cinema and Crypto. +15 Phy per correct answer (up to 60 per day).</span><span data-l="es">Responde preguntas de Matemáticas, Cultura General, Deportes, Tecnología, Geografía, Cine y Cripto. +15 Phy por respuesta correcta (hasta 60 al día).</span></p>
-      <span class="bento-tag tag-green"><span data-l="tr" class="active">7 Kategori</span><span data-l="en">7 Categories</span><span data-l="es">7 Categorías</span></span>
-    </div>
+      <div class="earn-feature-card fade-up" data-screen="1" style="--accent:linear-gradient(90deg,var(--green),#06B6D4);transition-delay:.12s">
+        <div class="accent-line"></div>
+        <div class="earn-feat-icon" style="background:rgba(34,245,160,.08)">🧠</div>
+        <h3><span data-l="tr" class="active">Bilgi Yarışması</span><span data-l="en">Trivia</span><span data-l="es">Trivia</span></h3>
+        <p><span data-l="tr" class="active">Matematik, Genel Kültür, Spor, Teknoloji, Coğrafya, Sinema ve Kripto kategorilerinde sorular çöz. Her doğru cevap +15 Phy (günde en fazla 60).</span><span data-l="en">Answer questions in Math, General Knowledge, Sports, Technology, Geography, Cinema and Crypto. +15 Phy per correct answer (up to 60 per day).</span><span data-l="es">Responde preguntas de Matemáticas, Cultura General, Deportes, Tecnología, Geografía, Cine y Cripto. +15 Phy por respuesta correcta (hasta 60 al día).</span></p>
+        <span class="bento-tag tag-green"><span data-l="tr" class="active">7 Kategori</span><span data-l="en">7 Categories</span><span data-l="es">7 Categorías</span></span>
+        <div class="earn-feat-mobile-img"><img src="/img/tr-1.webp" alt="" loading="lazy"/></div>
+      </div>
 
-    <div class="bento-card card-seri fade-up" style="--accent:linear-gradient(90deg,#F97316,var(--pink));transition-delay:.18s">
-      <div class="accent-line"></div>
-      <div class="bento-icon" style="background:rgba(249,115,22,.1)">🔥</div>
-      <h3><span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha Diaria</span></h3>
-      <p><span data-l="tr" class="active">Her gün giriş yaparak seri oluştur. 1–6. günler 50'den 400 Phy'ye yükseliyor; 7. gün Sürpriz Kutu: 500–3.000 Phy!</span><span data-l="en">Log in every day to build your streak. Days 1–6 earn from 50 to 400 Phy; Day 7 Surprise Box: 500–3,000 Phy!</span><span data-l="es">Entra cada día para tu racha. Los días 1–6 ganan de 50 a 400 Phy; el Día 7 Caja Sorpresa: 500–3.000 Phy!</span></p>
-      <span class="bento-tag" style="background:rgba(249,115,22,.12);color:#F97316;border:1px solid rgba(249,115,22,.25)"><span data-l="tr" class="active">7. Gün Sürpriz</span><span data-l="en">Day 7 Surprise</span><span data-l="es">Día 7 Sorpresa</span></span>
-    </div>
+      <div class="earn-feature-card fade-up" data-screen="4" style="--accent:linear-gradient(90deg,#F97316,var(--pink));transition-delay:.18s">
+        <div class="accent-line"></div>
+        <div class="earn-feat-icon" style="background:rgba(249,115,22,.1)">🔥</div>
+        <h3><span data-l="tr" class="active">Günlük Seri</span><span data-l="en">Daily Streak</span><span data-l="es">Racha Diaria</span></h3>
+        <p><span data-l="tr" class="active">Her gün giriş yaparak seri oluştur. 1–6. günler 50'den 400 Phy'ye yükseliyor; 7. gün Sürpriz Kutu: 500–3.000 Phy!</span><span data-l="en">Log in every day to build your streak. Days 1–6 earn from 50 to 400 Phy; Day 7 Surprise Box: 500–3,000 Phy!</span><span data-l="es">Entra cada día para tu racha. Los días 1–6 ganan de 50 a 400 Phy; el Día 7 Caja Sorpresa: 500–3.000 Phy!</span></p>
+        <span class="bento-tag" style="background:rgba(249,115,22,.12);color:#F97316;border:1px solid rgba(249,115,22,.25)"><span data-l="tr" class="active">7. Gün Sürpriz</span><span data-l="en">Day 7 Surprise</span><span data-l="es">Día 7 Sorpresa</span></span>
+        <div class="earn-feat-mobile-img"><img src="/img/tr-4.webp" alt="" loading="lazy"/></div>
+      </div>
 
-    <div class="bento-card card-davet fade-up" style="--accent:linear-gradient(90deg,#38BDF8,var(--purple));transition-delay:.24s">
-      <div class="accent-line"></div>
-      <div class="bento-icon" style="background:rgba(56,189,248,.08)">👥</div>
-      <div class="davet-body">
+      <div class="earn-feature-card fade-up" data-screen="6" style="--accent:linear-gradient(90deg,#38BDF8,var(--purple));transition-delay:.24s">
+        <div class="accent-line"></div>
+        <div class="earn-feat-icon" style="background:rgba(56,189,248,.08)">👥</div>
         <h3><span data-l="tr" class="active">Arkadaşını Davet Et</span><span data-l="en">Refer Friends</span><span data-l="es">Invita Amigos</span></h3>
         <p><span data-l="tr" class="active">Davet kodunla katılan her arkadaş için 5.000 Phy kazan. En fazla 10 arkadaş davet edilebilir.</span><span data-l="en">Earn 5,000 Phy for every friend who joins with your code. Up to 10 friends can be invited.</span><span data-l="es">Gana 5.000 Phy por cada amigo que se una con tu código. Se pueden invitar hasta 10 amigos.</span></p>
         <span class="bento-tag" style="background:rgba(56,189,248,.1);color:#38BDF8;border:1px solid rgba(56,189,248,.22)"><span data-l="tr" class="active">Max 10 Davet · 5.000 Phy / Kişi</span><span data-l="en">Up to 10 Referrals · 5,000 Phy each</span><span data-l="es">Hasta 10 referidos · 5.000 Phy c/u</span></span>
+        <div class="earn-feat-mobile-img"><img src="/img/tr-6.webp" alt="" loading="lazy"/></div>
+      </div>
+
+    </div>
+
+    <!-- Right: sticky phone -->
+    <div class="earn-sticky-side" aria-hidden="true">
+      <div class="earn-sticky-phone">
+        <div class="phone-notch"></div>
+        <img id="earn-phone-img" src="/img/tr-3.webp" alt="Phyward uygulama ekranı" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EARNINGS CALCULATOR -->
+<div class="calc-section" id="calculator">
+  <div class="calc-box fade-up">
+    <div class="calc-label-row">
+      <div class="section-label" style="margin-bottom:10px">
+        <span data-l="tr" class="active">Hesap Makinesi</span>
+        <span data-l="en">Calculator</span>
+        <span data-l="es">Calculadora</span>
+      </div>
+      <h2 class="calc-title">
+        <span data-l="tr" class="active">Ne Kadar Kazanırsın?</span>
+        <span data-l="en">How Much Can You Earn?</span>
+        <span data-l="es">¿Cuánto Puedes Ganar?</span>
+      </h2>
+      <p class="calc-subtitle">
+        <span data-l="tr" class="active">Günlük aktiviteni ayarla, tahmini kazancını gör.</span>
+        <span data-l="en">Set your daily activity, see your estimated earnings.</span>
+        <span data-l="es">Ajusta tu actividad diaria y ve tus ganancias estimadas.</span>
+      </p>
+    </div>
+
+    <div class="calc-controls">
+      <!-- Hourly -->
+      <div class="calc-field">
+        <label>
+          <span data-l="tr" class="active">Saatlik Bonus — Günde kaç kez?</span>
+          <span data-l="en">Hourly Bonus — How many times/day?</span>
+          <span data-l="es">Bono Hora — ¿Cuántas veces/día?</span>
+        </label>
+        <div class="slider-row">
+          <input type="range" id="c-hourly" min="0" max="24" value="8" step="1"/>
+          <span class="slider-val" id="c-hourly-val">8</span>
+        </div>
+      </div>
+      <!-- Ads -->
+      <div class="calc-field">
+        <label>
+          <span data-l="tr" class="active">Reklam İzle — Günde kaç reklam?</span>
+          <span data-l="en">Watch Ads — How many ads/day?</span>
+          <span data-l="es">Ver Anuncios — ¿Cuántos anuncios/día?</span>
+        </label>
+        <div class="slider-row">
+          <input type="range" id="c-ads" min="0" max="15" value="5" step="1"/>
+          <span class="slider-val" id="c-ads-val">5</span>
+        </div>
+      </div>
+      <!-- Trivia -->
+      <div class="calc-field">
+        <label>
+          <span data-l="tr" class="active">Bilgi Yarışması — Günde kaç soru?</span>
+          <span data-l="en">Trivia — How many questions/day?</span>
+          <span data-l="es">Trivia — ¿Cuántas preguntas/día?</span>
+        </label>
+        <div class="slider-row">
+          <input type="range" id="c-trivia" min="0" max="60" value="20" step="1"/>
+          <span class="slider-val" id="c-trivia-val">20</span>
+        </div>
+      </div>
+      <!-- Streak toggle -->
+      <label class="calc-streak-row">
+        <div class="toggle-wrap">
+          <input type="checkbox" id="c-streak" checked/>
+          <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        </div>
+        <span class="streak-label">
+          <span data-l="tr" class="active"><strong>Günlük Seri</strong> aktif — ort. <strong>+421 Phy/gün</strong></span>
+          <span data-l="en"><strong>Daily Streak</strong> active — avg <strong>+421 Phy/day</strong></span>
+          <span data-l="es"><strong>Racha Diaria</strong> activa — prom. <strong>+421 Phy/día</strong></span>
+        </span>
+      </label>
+    </div>
+
+    <div class="calc-outputs">
+      <div class="calc-out">
+        <span class="out-val" id="out-daily">1.621</span>
+        <span class="out-label"><span data-l="tr" class="active">Phy / Gün</span><span data-l="en">Phy / Day</span><span data-l="es">Phy / Día</span></span>
+      </div>
+      <div class="calc-out">
+        <span class="out-val" id="out-monthly">48.630</span>
+        <span class="out-label"><span data-l="tr" class="active">Phy / Ay</span><span data-l="en">Phy / Month</span><span data-l="es">Phy / Mes</span></span>
+      </div>
+      <div class="calc-out">
+        <span class="out-val" id="out-days">19</span>
+        <span class="out-label"><span data-l="tr" class="active">Gün → 1$ Kartı</span><span data-l="en">Days → $1 Card</span><span data-l="es">Días → Tarj. $1</span></span>
+      </div>
+      <div class="calc-out out-tier-box">
+        <span class="out-val" id="out-tier">$1</span>
+        <span class="out-label"><span data-l="tr" class="active">Aylık En İyi Ödül</span><span data-l="en">Best Monthly Reward</span><span data-l="es">Mejor Premio Mensual</span></span>
       </div>
     </div>
 
+    <p class="calc-disclaimer">
+      <span data-l="tr" class="active">* Tahmin amaçlıdır; gerçek kazanç kullanıcının aktivitesine ve reklam stoğuna göre değişir. Phyward, belirli bir kazanç miktarını garanti etmez. Güncel oranlar uygulama içindedir.</span>
+      <span data-l="en">* For estimation purposes only; actual earnings vary by user activity and ad availability. Phyward does not guarantee specific earnings. Current rates are shown in the app.</span>
+      <span data-l="es">* Solo estimativo; los ingresos reales varían según la actividad del usuario y la disponibilidad de anuncios. Phyward no garantiza ganancias específicas. Las tarifas actuales están en la app.</span>
+    </p>
   </div>
 </div>
 
@@ -798,6 +1041,16 @@
   </div>
 </footer>
 
+<!-- MOBILE DOWNLOAD BAR -->
+<div id="mobile-dl-bar">
+  <a href="https://play.google.com/store/apps/details?id=com.phyward" target="_blank" rel="noopener">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.24.98.21l13.1-13.1-2.83-2.83L3.18 23.76zm16.7-13.07l-2.6-1.5-3.17 3.17 3.17 3.16 2.62-1.51c.75-.43.75-1.47-.02-1.9zm-19.78-9.55C.04 1.33 0 1.54 0 1.77v20.46c0 .23.04.44.1.63L13.5 9.46zm3.08-.9L16.4 7.4l-2.83 2.83L.9.08c.44-.06.9.04 1.28.26z"/></svg>
+    <span data-l="tr" class="active">Google Play'den İndir</span>
+    <span data-l="en">Get it on Google Play</span>
+    <span data-l="es">Descargar en Google Play</span>
+  </a>
+</div>
+
 <script>
   /* ── Lang ──────────────────────────────────────── */
   let currentLang = 'tr';
@@ -809,6 +1062,7 @@
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
     updatePhoneImg();
+    updateEarnPhone();
   }
 
   /* ── Nav shrink ────────────────────────────────── */
@@ -822,14 +1076,14 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up,.fade-in').forEach(el => revealIO.observe(el));
 
-  /* ── Phone slideshow ───────────────────────────── */
+  /* ── Hero phone slideshow ──────────────────────── */
   let _slide = 0;
   let _slideTimer;
   const SLIDE_COUNT = 6;
 
   function updatePhoneImg() {
     const img = document.getElementById('phone-img');
-    if (img) img.src = '/img/' + currentLang + '-' + (_slide + 1) + '.png';
+    if (img) img.src = '/img/' + currentLang + '-' + (_slide + 1) + '.webp';
     document.querySelectorAll('.phone-dot').forEach((d, i) => d.classList.toggle('active', i === _slide));
   }
 
@@ -847,14 +1101,95 @@
 
   _slideTimer = setInterval(nextSlide, 3200);
 
-  /* ── Bento spotlight ───────────────────────────── */
-  document.querySelectorAll('.bento-card').forEach(card => {
+  /* ── Earn sticky phone ─────────────────────────── */
+  let _earnScreen = 3;
+
+  function updateEarnPhone() {
+    const img = document.getElementById('earn-phone-img');
+    if (img) img.src = '/img/' + currentLang + '-' + _earnScreen + '.webp';
+    document.querySelectorAll('.earn-feat-mobile-img img').forEach(mimg => {
+      const sc = mimg.closest('.earn-feature-card').dataset.screen;
+      if (sc) mimg.src = '/img/' + currentLang + '-' + sc + '.webp';
+    });
+  }
+
+  const earnIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        _earnScreen = e.target.dataset.screen;
+        document.querySelectorAll('.earn-feature-card').forEach(c => c.classList.remove('is-active'));
+        e.target.classList.add('is-active');
+        updateEarnPhone();
+      }
+    });
+  }, { threshold: 0.45, rootMargin: '-5% 0px -45% 0px' });
+  document.querySelectorAll('.earn-feature-card[data-screen]').forEach(c => earnIO.observe(c));
+
+  /* ── Spotlight ─────────────────────────────────── */
+  document.querySelectorAll('.bento-card,.earn-feature-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
       card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
       card.style.setProperty('--my', (e.clientY - r.top) + 'px');
     });
   });
+
+  /* ── Earnings calculator ───────────────────────── */
+  const SEP = { tr: '.', en: ',', es: '.' };
+  function fmt(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, SEP[currentLang] || '.');
+  }
+
+  function animateNum(id, target) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const start = +(el.dataset.cur || 0);
+    el.dataset.cur = target;
+    if (Math.abs(target - start) < 2) { el.textContent = fmt(target); return; }
+    const dur = 380, t0 = performance.now();
+    (function step(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = fmt(Math.round(start + (target - start) * p));
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  function calcUpdate() {
+    const hourly = +document.getElementById('c-hourly').value;
+    const ads    = +document.getElementById('c-ads').value;
+    const trivia = +document.getElementById('c-trivia').value;
+    const streak = document.getElementById('c-streak').checked;
+    document.getElementById('c-hourly-val').textContent = hourly;
+    document.getElementById('c-ads-val').textContent   = ads;
+    document.getElementById('c-trivia-val').textContent = trivia;
+    const daily   = hourly * 50 + ads * 100 + trivia * 15 + (streak ? 421 : 0);
+    const monthly = daily * 30;
+    const daysTo1 = daily > 0 ? Math.ceil(30000 / daily) : '∞';
+    const tiers   = [[300000,'$10'],[120000,'$5'],[105000,'$4'],[80000,'$3'],[55000,'$2'],[30000,'$1']];
+    let best = '-';
+    for (const [t, lbl] of tiers) { if (monthly >= t) { best = lbl; break; } }
+    animateNum('out-daily', daily);
+    animateNum('out-monthly', monthly);
+    document.getElementById('out-days').textContent = daysTo1 === '∞' ? '∞' : daysTo1;
+    document.getElementById('out-tier').textContent = best;
+  }
+
+  ['c-hourly','c-ads','c-trivia','c-streak'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', calcUpdate);
+  });
+  calcUpdate();
+
+  /* ── Mobile download bar ───────────────────────── */
+  const dlBar = document.getElementById('mobile-dl-bar');
+  if (dlBar) {
+    const hideSet = new Set();
+    const barIO = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) hideSet.add(e.target); else hideSet.delete(e.target); });
+      dlBar.classList.toggle('bar-hidden', hideSet.size > 0);
+    }, { threshold: 0.01 });
+    document.querySelectorAll('#download, .hero-actions .btn-gplay').forEach(t => barIO.observe(t));
+  }
 </script>
 </body>
 </html>
