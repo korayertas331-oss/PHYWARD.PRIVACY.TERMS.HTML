@@ -453,7 +453,7 @@
     }
 
     /* ── Space Grotesk headings ───────────────────── */
-    h1,h2,h3,.stat-num,.calc-title{font-family:'Space Grotesk','Inter',system-ui,sans-serif}
+    h1,h2,h3,.stat-num{font-family:'Space Grotesk','Inter',system-ui,sans-serif}
 
     /* ── QR card (hero, desktop) ───────────────────── */
     .hero-qr{display:none;flex-direction:column;align-items:flex-start;gap:8px;margin-top:24px}
@@ -500,63 +500,6 @@
       .earn-feat-mobile-img{display:block}
     }
 
-    /* ── Earnings calculator ───────────────────────── */
-    .calc-section{max-width:1080px;margin:0 auto;padding:0 24px 88px}
-    .calc-box{
-      background:var(--glass);border:1px solid var(--glass-border);
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      border-radius:28px;padding:48px;position:relative;overflow:hidden;
-    }
-    .calc-label-row{margin-bottom:28px}
-    .calc-title{font-size:clamp(22px,3vw,32px);font-weight:900;letter-spacing:-.5px;line-height:1.1;margin-bottom:8px}
-    .calc-subtitle{font-size:14px;color:var(--muted)}
-    .calc-controls{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
-    .calc-field label{display:block;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-    .calc-field .slider-row{display:flex;align-items:center;gap:12px}
-    .calc-field input[type=range]{
-      -webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:4px;
-      background:var(--purple-dim);cursor:pointer;outline:none;
-    }
-    .calc-field input[type=range]::-webkit-slider-thumb{
-      -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;
-      background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 0 10px rgba(139,92,246,.4);
-    }
-    .calc-field input[type=range]::-moz-range-thumb{
-      width:18px;height:18px;border-radius:50%;border:none;
-      background:linear-gradient(135deg,var(--purple),var(--pink));
-    }
-    .slider-val{min-width:40px;text-align:right;font-size:16px;font-weight:800;color:var(--text);font-family:'Space Grotesk',sans-serif}
-    .calc-streak-row{
-      grid-column:span 2;display:flex;align-items:center;gap:14px;
-      background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.18);
-      border-radius:16px;padding:16px 20px;cursor:pointer;
-    }
-    .toggle-wrap{position:relative;width:46px;height:26px;flex-shrink:0}
-    .toggle-wrap input{opacity:0;width:0;height:0;position:absolute}
-    .toggle-track{position:absolute;inset:0;border-radius:13px;background:rgba(255,255,255,.14);transition:background .2s}
-    .toggle-wrap input:checked ~ .toggle-track{background:linear-gradient(135deg,#F97316,var(--pink))}
-    .toggle-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-    .toggle-wrap input:checked ~ .toggle-track .toggle-thumb{transform:translateX(20px)}
-    .streak-label{flex:1;font-size:13px;color:var(--text);line-height:1.5}
-    .streak-label strong{color:#F97316}
-    .calc-outputs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .calc-out{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:20px;text-align:center}
-    .out-val{
-      font-size:clamp(20px,2.4vw,28px);font-weight:900;letter-spacing:-1px;
-      font-family:'Space Grotesk',sans-serif;display:block;margin-bottom:4px;
-      background:linear-gradient(135deg,var(--purple),var(--pink));
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    }
-    .calc-out.out-tier-box .out-val{font-size:clamp(18px,2vw,24px)}
-    .out-label{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.4px;text-transform:uppercase}
-    .calc-disclaimer{margin-top:20px;font-size:11px;color:var(--muted2);border-top:1px solid rgba(255,255,255,.06);padding-top:14px;line-height:1.65}
-    @media(max-width:768px){
-      .calc-controls{grid-template-columns:1fr}
-      .calc-streak-row{grid-column:span 1}
-      .calc-outputs{grid-template-columns:repeat(2,1fr)}
-      .calc-box{padding:28px 20px}
-    }
-
     /* ── Mobile download bar ───────────────────────── */
     #mobile-dl-bar{
       display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;
@@ -573,11 +516,6 @@
       font-size:15px;font-weight:700;box-shadow:0 4px 20px rgba(139,92,246,.4);
     }
     @media(max-width:900px){#mobile-dl-bar{display:block}body{padding-bottom:80px}}
-
-    /* ── Streak label on/off ───────────────────────── */
-    .sl-off{display:none}
-    .streak-label.is-off .sl-on{display:none}
-    .streak-label.is-off .sl-off{display:inline}
 
     /* ── FAQ accordion ─────────────────────────────── */
     .faq-list{display:flex;flex-direction:column;gap:10px}
@@ -903,104 +841,6 @@
   </div>
 </div>
 
-<!-- EARNINGS CALCULATOR -->
-<div class="calc-section" id="calculator">
-  <div class="calc-box fade-up">
-    <div class="calc-label-row">
-      <div class="section-label" style="margin-bottom:10px">
-        <span data-l="tr" class="active">Hesap Makinesi</span>
-        <span data-l="en">Calculator</span>
-        <span data-l="es">Calculadora</span>
-      </div>
-      <h2 class="calc-title">
-        <span data-l="tr" class="active">Ne Kadar Kazanırsın?</span>
-        <span data-l="en">How Much Can You Earn?</span>
-        <span data-l="es">¿Cuánto Puedes Ganar?</span>
-      </h2>
-      <p class="calc-subtitle">
-        <span data-l="tr" class="active">Günlük aktiviteni ayarla, tahmini kazancını gör.</span>
-        <span data-l="en">Set your daily activity, see your estimated earnings.</span>
-        <span data-l="es">Ajusta tu actividad diaria y ve tus ganancias estimadas.</span>
-      </p>
-    </div>
-
-    <div class="calc-controls">
-      <!-- Hourly -->
-      <div class="calc-field">
-        <label>
-          <span data-l="tr" class="active">Saatlik Bonus — Günde kaç kez?</span>
-          <span data-l="en">Hourly Bonus — How many times/day?</span>
-          <span data-l="es">Bono Hora — ¿Cuántas veces/día?</span>
-        </label>
-        <div class="slider-row">
-          <input type="range" id="c-hourly" min="0" max="24" value="8" step="1"/>
-          <span class="slider-val" id="c-hourly-val">8</span>
-        </div>
-      </div>
-      <!-- Ads -->
-      <div class="calc-field">
-        <label>
-          <span data-l="tr" class="active">Reklam İzle — Günde kaç reklam?</span>
-          <span data-l="en">Watch Ads — How many ads/day?</span>
-          <span data-l="es">Ver Anuncios — ¿Cuántos anuncios/día?</span>
-        </label>
-        <div class="slider-row">
-          <input type="range" id="c-ads" min="0" max="15" value="5" step="1"/>
-          <span class="slider-val" id="c-ads-val">5</span>
-        </div>
-      </div>
-      <!-- Trivia -->
-      <div class="calc-field">
-        <label>
-          <span data-l="tr" class="active">Bilgi Yarışması — Günde kaç soru?</span>
-          <span data-l="en">Trivia — How many questions/day?</span>
-          <span data-l="es">Trivia — ¿Cuántas preguntas/día?</span>
-        </label>
-        <div class="slider-row">
-          <input type="range" id="c-trivia" min="0" max="60" value="20" step="1"/>
-          <span class="slider-val" id="c-trivia-val">20</span>
-        </div>
-      </div>
-      <!-- Streak toggle -->
-      <label class="calc-streak-row">
-        <div class="toggle-wrap">
-          <input type="checkbox" id="c-streak" checked/>
-          <div class="toggle-track"><div class="toggle-thumb"></div></div>
-        </div>
-        <span class="streak-label" id="streak-label-wrap">
-          <span class="sl-on"><span data-l="tr" class="active"><strong>Günlük Seri</strong> aktif — ort. <strong>+421 Phy/gün</strong></span><span data-l="en">Daily streak on — avg. <strong>+421 Phy/day</strong></span><span data-l="es">Racha diaria activa — prom. <strong>+421 Phy/día</strong></span></span>
-          <span class="sl-off"><span data-l="tr" class="active">Günlük Seri kapalı</span><span data-l="en">Daily streak off</span><span data-l="es">Racha diaria desactivada</span></span>
-        </span>
-      </label>
-    </div>
-
-    <div class="calc-outputs">
-      <div class="calc-out">
-        <span class="out-val" id="out-daily">1.621</span>
-        <span class="out-label"><span data-l="tr" class="active">Phy / Gün</span><span data-l="en">Phy / Day</span><span data-l="es">Phy / Día</span></span>
-      </div>
-      <div class="calc-out">
-        <span class="out-val" id="out-monthly">48.630</span>
-        <span class="out-label"><span data-l="tr" class="active">Phy / Ay</span><span data-l="en">Phy / Month</span><span data-l="es">Phy / Mes</span></span>
-      </div>
-      <div class="calc-out">
-        <span class="out-val" id="out-days">19</span>
-        <span class="out-label"><span data-l="tr" class="active">Gün → 1 $ Kartı</span><span data-l="en">Days → $1 Card</span><span data-l="es">Días → Tarj. 1 $</span></span>
-      </div>
-      <div class="calc-out out-tier-box">
-        <span class="out-val" id="out-tier">$1</span>
-        <span class="out-label"><span data-l="tr" class="active">Aylık En İyi Ödül</span><span data-l="en">Best Monthly Reward</span><span data-l="es">Mejor Premio Mensual</span></span>
-      </div>
-    </div>
-
-    <p class="calc-disclaimer">
-      <span data-l="tr" class="active">* Tahmin amaçlıdır; gerçek kazanç kullanıcının aktivitesine ve reklam stoğuna göre değişir. Phyward, belirli bir kazanç miktarını garanti etmez. Güncel oranlar uygulama içindedir.</span>
-      <span data-l="en">* For estimation purposes only; actual earnings vary by user activity and ad availability. Phyward does not guarantee specific earnings. Current rates are shown in the app.</span>
-      <span data-l="es">* Solo estimativo; los ingresos reales varían según la actividad del usuario y la disponibilidad de anuncios. Phyward no garantiza ganancias específicas. Las tarifas actuales están en la app.</span>
-    </p>
-  </div>
-</div>
-
 <!-- CTA -->
 <div class="cta-wrap" id="download">
   <div class="cta-box fade-up">
@@ -1268,7 +1108,6 @@
     if (btn) btn.classList.add('active');
     updatePhoneImg();
     updateEarnPhone();
-    calcUpdate();
   }
 
   /* ── Nav shrink ────────────────────────────────── */
@@ -1339,59 +1178,6 @@
       card.style.setProperty('--my', (e.clientY - r.top) + 'px');
     });
   });
-
-  /* ── Earnings calculator ───────────────────────── */
-  const SEP = { tr: '.', en: ',', es: '.' };
-  function fmt(n) {
-    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, SEP[currentLang] || '.');
-  }
-
-  function animateNum(id, target) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const start = +(el.dataset.cur || 0);
-    el.dataset.cur = target;
-    if (Math.abs(target - start) < 2) { el.textContent = fmt(target); return; }
-    const dur = 380, t0 = performance.now();
-    (function step(now) {
-      const p = Math.min((now - t0) / dur, 1);
-      el.textContent = fmt(Math.round(start + (target - start) * p));
-      if (p < 1) requestAnimationFrame(step);
-    })(t0);
-  }
-
-  function fmtTier(usd) {
-    return currentLang === 'en' ? '$' + usd : usd + ' $';
-  }
-
-  function calcUpdate() {
-    const hourly = +document.getElementById('c-hourly').value;
-    const ads    = +document.getElementById('c-ads').value;
-    const trivia = +document.getElementById('c-trivia').value;
-    const streak = document.getElementById('c-streak').checked;
-    document.getElementById('c-hourly-val').textContent = hourly;
-    document.getElementById('c-ads-val').textContent   = ads;
-    document.getElementById('c-trivia-val').textContent = trivia;
-    const daily   = hourly * 50 + ads * 100 + trivia * 15 + (streak ? 421 : 0);
-    const monthly = daily * 30;
-    const daysTo1 = daily > 0 ? Math.ceil(30000 / daily) : '∞';
-    const TIERS   = [[300000,10],[120000,5],[105000,4],[80000,3],[55000,2],[30000,1]];
-    let best = '-';
-    for (const [t, usd] of TIERS) { if (monthly >= t) { best = fmtTier(usd); break; } }
-    animateNum('out-daily', daily);
-    animateNum('out-monthly', monthly);
-    document.getElementById('out-days').textContent = daysTo1 === '∞' ? '∞' : daysTo1;
-    document.getElementById('out-tier').textContent = best;
-    // Streak label on/off
-    const wrap = document.getElementById('streak-label-wrap');
-    if (wrap) wrap.classList.toggle('is-off', !streak);
-  }
-
-  ['c-hourly','c-ads','c-trivia','c-streak'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', calcUpdate);
-  });
-  calcUpdate();
 
   /* ── Mobile download bar ───────────────────────── */
   const dlBar = document.getElementById('mobile-dl-bar');
